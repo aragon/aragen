@@ -1,0 +1,32 @@
+{
+  "name": "@aragon/aragen",
+  "version": "1.0.0",
+  "description": "Generate an Aragon local dev environment snapshots",
+  "main": "index.js",
+  "scripts": {
+    "prepublish": "npm run gen",
+    "start": "npm install && npm run gen",
+    "gen": "scripts/deploy-base && scripts/deploy-beta",
+    "start-ganache": "scripts/start-ganache",
+    "get-repos": "scripts/get-repos",
+    "deploy-base": "scripts/deploy-base",
+    "deploy-beta": "scripts/deploy-beta"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aragon/aragen.git"
+  },
+  "author": "Aragon One AG",
+  "contributors": [
+    "Jorge Izquierdo <jorge@aragon.one>"
+  ],
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/aragon/aragen/issues"
+  },
+  "homepage": "https://github.com/aragon/aragen#readme",
+  "devDependencies": {
+    "ganache-cli": "^6.1.0",
+    "truffle": "^4.0.5"
+  }
+}

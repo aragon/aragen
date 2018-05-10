@@ -1,0 +1,24 @@
+#!/bin/sh
+
+echo "Cleaning and creating '.repos'"
+rm -rf .repos;
+mkdir .repos;
+cd .repos;
+
+echo "Fetching aragonOS and installing dependencies..."
+git clone --depth 1 https://github.com/aragon/aragonOS.git -b dev;
+cd aragonOS;
+npm i;
+cd ..;
+
+echo "Fetching aragon-id and installing dependencies..."
+git clone --depth 1 https://github.com/aragon/aragon-id.git -b master;
+cd aragon-id;
+npm i;
+cd ..;
+
+echo "Fetching aragon-apps and installing dependencies (this may take a while 😉)"
+git clone --depth 1 https://github.com/aragon/aragon-apps.git -b master;
+cd aragon-apps;
+npm i;
+cd ..;
