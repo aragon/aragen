@@ -1,7 +1,7 @@
 {
   "name": "@aragon/aragen",
   "version": "1.0.0",
-  "description": "Generate an Aragon local dev environment snapshots",
+  "description": "Generate Aragon local dev environment snapshots",
   "main": "index.js",
   "scripts": {
     "prepublish": "npm run gen",
