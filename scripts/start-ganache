@@ -1,4 +1,4 @@
 #!/bin/sh
 
-rm -rf aragon-ganache/*
+set -e;
 npx ganache-cli -s "explain tackle mirror kit van hammer degree position ginger unfair soup bonus" -i 15 -l 100000000 --db aragon-ganache

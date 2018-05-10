@@ -3,7 +3,6 @@
 source scripts/set-env;
 
 echo "Make sure you are on a fresh chain running with the default seed"
-echo "Did you run 'npm run ganache-start'?"
 sleep 2; # let the people read
 
 echo "Deploying ENS instance"

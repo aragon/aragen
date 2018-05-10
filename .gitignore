@@ -1,3 +1,4 @@
 node_modules
 .repos
 aragon-ganache
+nohup.out

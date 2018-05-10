@@ -7,7 +7,8 @@
 
 ### How to
 ```
-npm start
+npm i
+npm run gen
 ```
 
 Yes, you are done. Happy hacking 🔥🦅!

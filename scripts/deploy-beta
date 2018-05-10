@@ -1,5 +1,6 @@
 #!/bin/sh
 
+set -e;
 source scripts/set-env;
 
 cd .repos/aragon-apps/templates/beta;
