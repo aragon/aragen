@@ -1,11 +1,18 @@
 language: node_js
 cache:
   directories:
-    - node_modules
+  - node_modules
 notifications:
   email: true
 node_js:
-  - '8'
+- '8'
 before_script:
-  - npm prune
-script: "npm publish --access public"
+- npm prune
+deploy:
+  provider: npm
+  email: jorge@aragon.one
+  api_key:
+    secure: V2Jswh8t6ujnX8cUAQunw2pMNfixRi0sp95fdu/VGabTRXbNmR5YNDza0CndcXo4iu0tvp5S8YJF0HfkuhqdkbpmOXeqOqZPzGkFzGlMs5TSFJL7aVpfTK9PVVxhOPiqc28OexnEhvNk5xqr1DqCI/9o2hmsp203MtueQHZiEGi6aWL4tPjNtfz8vZJfG8z0PHmqYZlgSHCZDtGAgVPVOWgHZPjQjUglB3mqr1StTbwaTa1GsWqRMOMtpixQrpvdu8LNbPDOd+XMSvrNUEgpLlpI17bbxKj0AvjoNoyG4fH8o9bXUKouWny51YnKrMyt6fwk3UgFpE7jnFrmb3OG4g1gLuWckB1dJLXioIoxLt19ZuEwoXVA8SVyTV2FViQuTDkaf+WVh8VYLaUgMoBrTmxraNaQXiUdXKYNsRiH1N2/+EHuWMmHRBLbRFFaTYNFhiPEIds5cnYGYGn5EZG4dm96pTa8Z+TtWl0Kg7BwKxYWsAmcneYcDskbrIeHcXp+Xjbl1eohXhC8NvDmet89h4pNz2Rf0izzexlEF+f0n9q3JZRJTrWY61uo5KY5amhJIeHX9/Fd+jTuCtEc2ICgm+mhyH6jyt847OqLNSSPSaSYceZwEmoGNTsqGU7b0vWBryM6v/dktZ+wWN0aYM6xX7oLkIJ+Z/A+JjhwVH29gV0=
+  on:
+    tags: true
+    repo: aragon/aragen
