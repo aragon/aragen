@@ -1,5 +1,6 @@
-# AraGen
-## Generate an Aragon environment
+# AraGen [![Build Status](https://travis-ci.org/aragon/aragen.svg?branch=master)](https://travis-ci.org/aragon/aragen)
+
+Generate an Aragon environment
 
 ### Requirements
 - `npm`
