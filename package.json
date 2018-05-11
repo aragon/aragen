@@ -14,6 +14,7 @@
     "deploy-beta": "scripts/deploy-beta"
   },
   "files": [
+    "index.js",
     "repos/*"
   ],
   "repository": {
