@@ -1,15 +1,15 @@
 #!/bin/sh
 
+set -e;
 source scripts/set-env;
 
-echo "Make sure you are on a fresh chain running with the default seed"
+echo "Make sure you are on a fresh chain running with the default mnemonic"
 sleep 2; # let the people read
 
 echo "Deploying ENS instance"
-cd .repos/aragonOS;
+cd repos/aragonOS;
 npx truffle compile;
 DEPLOYED_ENS=$(npx truffle exec --network rpc scripts/deploy-beta-ens.js | tail -n 1)
-
 if [ "${ENS}" = "${DEPLOYED_ENS}" ]; then 
 	echo "ENS deployed $DEPLOYED_ENS"
 else

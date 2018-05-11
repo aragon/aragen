@@ -1,10 +1,10 @@
 #!/bin/sh
 
 set -e;
-echo "Cleaning and creating '.repos'"
-rm -rf .repos;
-mkdir .repos;
-cd .repos;
+echo "Cleaning and creating 'repos' dir"
+rm -rf repos;
+mkdir repos;
+cd repos;
 
 echo "Fetching aragonOS and installing dependencies..."
 git clone --depth 1 https://github.com/aragon/aragonOS.git -b dev;

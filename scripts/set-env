@@ -1,4 +1,4 @@
 #!/bin/sh
 
-export OWNER="0xc94e1140d241d88cce4cb84aa712fb1df68d009c"
-export ENS="0x644f11d76d4b192df168c49a06db4928ea410bbc"
+export OWNER="0xb4124ceb3451635dacedd11767f004d8a28c6ee7"
+export ENS="0x5f6f7e8cc7346a11ca2def8f827b7a0b612c56a1"

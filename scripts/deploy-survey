@@ -1,7 +1,8 @@
 #!/bin/sh
 
+set -e;
 source scripts/set-env;
 
-cd dao-kits/kits/survey;
+cd repos/dao-kits/kits/survey;
 npx truffle migrate --reset --network rpc
 
