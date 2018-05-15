@@ -1,12 +1,12 @@
 {
   "name": "@aragon/aragen",
-  "version": "1.0.2",
+  "version": "1.0.1-beta.1",
   "description": "Generate Aragon local dev environment snapshots",
   "main": "index.js",
   "scripts": {
-    "prepublish": "npm run start",
-    "start": "npm run gen",
-    "gen": "npm run get-repos && npm run start-ganache-bg && scripts/deploy-base && scripts/deploy-beta",
+    "prepublishOnly": "npm run start",
+    "start": "npm run start-ganache-bg && npm run gen",
+    "gen": "npm run get-repos && scripts/deploy-base && scripts/deploy-beta",
     "start-ganache": "scripts/start-ganache",
     "start-ganache-bg": "scripts/start-ganache-bg",
     "get-repos": "scripts/get-repos",
@@ -15,7 +15,8 @@
   },
   "files": [
     "index.js",
-    "repos/*"
+    "repos/*",
+    "aragon-ganache"
   ],
   "repository": {
     "type": "git",
