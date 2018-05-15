@@ -3,20 +3,19 @@
 set -e;
 source scripts/set-env;
 
-echo "Make sure you are on a fresh chain running with the default mnemonic"
+echo "Make sure you are on an empty chain running with the default mnemonic"
 sleep 2; # let the people read
 
 echo "Deploying ENS instance"
 cd repos/aragonOS;
 npx truffle compile;
-npx truffle exec --network rpc scripts/deploy-beta-ens.js
-#DEPLOYED_ENS=$(npx truffle exec --network rpc scripts/deploy-beta-ens.js | tail -n 1)
-#if [ "${ENS}" = "${DEPLOYED_ENS}" ]; then 
-#	echo "ENS deployed $DEPLOYED_ENS"
+DEPLOYED_ENS=$(npx truffle exec --network rpc scripts/deploy-beta-ens.js | tail -n 1)
+if [ "${ENS}" = "${DEPLOYED_ENS}" ]; then 
+	echo "ENS deployed $DEPLOYED_ENS"
 else
 	echo >&2 "ENS address missmatch. Please restart ganache by running:";
 	echo "npm run aragon-ganache";
-	rm -rf aragon-ganache/*;
+	rm -rf aragon-ganache;
 	exit 1;
 fi
 
@@ -26,4 +25,4 @@ npx truffle exec --network rpc scripts/deploy-beta-apm.js
 cd ../aragon-id;
 echo "Deploying aragonID registry to aragonpm.eth"
 npx truffle compile;
-npx truffle exec --network rpc scripts/deploy-beta-aragonid.js
+npx truffle exec --network rpc scripts/deploy-beta-aragonid.js;
