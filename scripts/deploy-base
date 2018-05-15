@@ -9,9 +9,10 @@ sleep 2; # let the people read
 echo "Deploying ENS instance"
 cd repos/aragonOS;
 npx truffle compile;
-DEPLOYED_ENS=$(npx truffle exec --network rpc scripts/deploy-beta-ens.js | tail -n 1)
-if [ "${ENS}" = "${DEPLOYED_ENS}" ]; then 
-	echo "ENS deployed $DEPLOYED_ENS"
+npx truffle exec --network rpc scripts/deploy-beta-ens.js
+#DEPLOYED_ENS=$(npx truffle exec --network rpc scripts/deploy-beta-ens.js | tail -n 1)
+#if [ "${ENS}" = "${DEPLOYED_ENS}" ]; then 
+#	echo "ENS deployed $DEPLOYED_ENS"
 else
 	echo >&2 "ENS address missmatch. Please restart ganache by running:";
 	echo "npm run aragon-ganache";
