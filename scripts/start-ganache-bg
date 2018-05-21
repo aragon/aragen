@@ -5,16 +5,11 @@ ganache_running() {
   nc -z localhost "$ganache_port" &> /dev/null
 }
 
-set +e;
-rm -rf aragon-ganache;
-
 if ganache_running; then
   echo "Killing ganache instance at port $ganache_port"
   kill -9 $(lsof -t -i:$ganache_port);
 fi
 
-mkdir aragon-ganache;
-set -e;
-
 printf "Starting ganache in the background\n\n";
+
 nohup npm run start-ganache &

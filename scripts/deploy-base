@@ -14,7 +14,7 @@ if [ "${ENS}" = "${DEPLOYED_ENS}" ]; then
 	echo "ENS deployed $DEPLOYED_ENS"
 else
 	echo >&2 "ENS address missmatch. Please restart ganache by running:";
-	echo "npm run aragon-ganache";
+	echo "npm run start-ganache";
 	rm -rf aragon-ganache;
 	exit 1;
 fi
