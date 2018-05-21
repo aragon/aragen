@@ -1,9 +1,7 @@
 #!/bin/bash
 
 set +e;
-rm -rf aragon-ganache;
 kill -9 $(lsof -t -i:8545);
-mkdir aragon-ganache;
 set -e;
 
 echo \"Starting ganache in the background\n\n\";
