@@ -18,7 +18,7 @@ cd aragon-id;
 npm i;
 cd ..;
 
-echo "Fetching aragon-apps and installing dependencies (this may take a while 😉)"
-git clone https://github.com/aragon/aragon-apps.git -b master;
-cd aragon-apps;
+echo "Fetching dao-kits and installing dependencies (this may take a while 😉)"
+git clone https://github.com/aragon/dao-kits.git -b master;
+cd dao-kits;
 npm i;

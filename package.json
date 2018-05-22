@@ -6,13 +6,14 @@
   "scripts": {
     "prepublishOnly": "npm run gen",
     "postinstall": "npm run gen",
-    "start": "npm run start-ganache-bg && npm run deploy",
+    "start": "npm run start:beta",
+    "start:beta": "npm run start-ganache-bg && npm run deploy:beta",
+    "start:survey": "npm run start-ganache-bg && npm run deploy:survey",
     "gen": "scripts/get-repos",
-    "deploy": "scripts/deploy-base && scripts/deploy-beta",
+    "deploy:beta": "scripts/deploy-base && scripts/deploy-beta",
+    "deploy:survey": "scripts/deploy-base && scripts/deploy-survey",
     "start-ganache": "scripts/start-ganache",
-    "start-ganache-bg": "scripts/start-ganache-bg",
-    "deploy-base": "scripts/deploy-base",
-    "deploy-beta": "scripts/deploy-beta"
+    "start-ganache-bg": "scripts/start-ganache-bg"
   },
   "files": [
     "index.js",

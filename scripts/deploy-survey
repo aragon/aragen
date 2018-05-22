@@ -6,3 +6,4 @@ source scripts/set-env;
 cd repos/dao-kits/kits/survey;
 npx truffle migrate --reset --network rpc
 
+echo "Survey kit deployed and packages created in APM"
