@@ -19,6 +19,6 @@ npm i;
 cd ..;
 
 echo "Fetching dao-kits and installing dependencies (this may take a while 😉)"
-git clone git@github.com:aragon/dao-kits.git -b master;
+git clone git@github.com:aragon/dao-kits.git -b survey-demo;
 cd dao-kits;
 npm i;
