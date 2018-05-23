@@ -7,7 +7,7 @@ mkdir repos;
 cd repos;
 
 echo "Fetching aragonOS and installing dependencies..."
-git clone git@github.com:aragon/aragonOS -b v3.1.4;
+git clone git@github.com:aragon/aragonOS -b v3.1.8;
 cd aragonOS;
 npm i;
 cd ..;
