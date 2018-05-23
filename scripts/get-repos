@@ -7,18 +7,18 @@ mkdir repos;
 cd repos;
 
 echo "Fetching aragonOS and installing dependencies..."
-git clone https://github.com/aragon/aragonOS.git -b v3.1.4;
+git clone git@github.com:aragon/aragonOS -b v3.1.4;
 cd aragonOS;
 npm i;
 cd ..;
 
 echo "Fetching aragon-id and installing dependencies..."
-git clone https://github.com/aragon/aragon-id.git -b master;
+git clone git@github.com:aragon/aragon-id -b master;
 cd aragon-id;
 npm i;
 cd ..;
 
 echo "Fetching dao-kits and installing dependencies (this may take a while 😉)"
-git clone https://github.com/aragon/dao-kits.git -b master;
+git clone git@github.com:aragon/dao-kits.git -b master;
 cd dao-kits;
 npm i;
