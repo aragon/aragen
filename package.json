@@ -9,9 +9,11 @@
     "start": "npm run start:beta",
     "start:beta": "npm run start-ganache-bg && npm run deploy:beta",
     "start:survey": "npm run start-ganache-bg && npm run deploy:survey",
+    "start:survey-demo": "npm run start:survey && npm run deploy:survey-demo",
     "gen": "scripts/get-repos",
     "deploy:beta": "scripts/deploy-base && scripts/deploy-beta",
     "deploy:survey": "scripts/deploy-base && scripts/deploy-survey",
+    "deploy:survey-demo": "scripts/deploy-survey-demo",
     "start-ganache": "scripts/start-ganache",
     "start-ganache-bg": "scripts/start-ganache-bg"
   },

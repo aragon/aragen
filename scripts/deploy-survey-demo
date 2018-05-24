@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -e;
+source scripts/set-env;
+
+pushd repos/aragon-apps/apps/survey;
+# make sure the arapp.json is on version 1.0.0
+mv arapp.json arapp.json.tmp
+awk '//{gsub(/[0-9]+.[0-9]+.[0-9]+/, "1.0.0")};{print}' < arapp.json.tmp > arapp.json
+npm run publish:rpc
+
+popd
+cd repos/dao-kits/kits/survey-demo;
+npx truffle migrate --reset --network rpc
+
+echo "Survey kit deployed and packages created in APM"
