@@ -1,0 +1,9 @@
+#!/bin/bash
+
+rm -rf published-apps;
+mkdir published-apps;
+set -e;
+
+cd repos/aragon-apps;
+npx lerna exec --stream --scope=@aragon/apps-* "apm version 1.0.0"
+npx lerna exec --stream --scope=@aragon/apps-vault --concurrency=1 "apm publish --files app/build --publish-dir ../../../../published-apps/\"$(../../scripts/rand)\" --apm.ipfs.rpc \"http://ipfs.aragon.network:5001\" --network rpc --no-ipfs-check"0

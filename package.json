@@ -16,7 +16,8 @@
   "files": [
     "index.js",
     "repos/*",
-    "aragon-ganache"
+    "aragon-ganache",
+    "published-apps/*"
   ],
   "repository": {
     "type": "git",
@@ -32,6 +33,7 @@
   },
   "homepage": "https://github.com/aragon/aragen#readme",
   "devDependencies": {
+    "@aragon/cli": "^4.0.0-rc.14",
     "ganache-cli": "^6.1.0",
     "truffle": "4.0.5"
   },
