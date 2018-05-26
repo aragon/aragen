@@ -5,5 +5,24 @@ mkdir published-apps;
 set -e;
 
 cd repos/aragon-apps;
-npx lerna exec --stream --scope=@aragon/apps-* "apm version 1.0.0"
-npx lerna exec --stream --scope=@aragon/apps-vault --concurrency=1 "apm publish --files app/build --publish-dir ../../../../published-apps/\"$(../../scripts/rand)\" --apm.ipfs.rpc \"http://ipfs.aragon.network:5001\" --network rpc --no-ipfs-check"0
+cd apps/voting;
+
+npm link @aragon/cli
+npx apm version 1.0.0 --network rpc
+npx apm publish --network rpc --no-ipfs-check --files app/build --publish-dir ../../../../published-apps/"$(../../../../scripts/rand)" --apm.ipfs.rpc "http://ipfs.aragon.network:5001"
+
+cd ../token-manager;
+npm link @aragon/cli
+npx apm version 1.0.0 --network rpc
+npx apm publish --network rpc --no-ipfs-check --files app/build --publish-dir ../../../../published-apps/"$(../../../../scripts/rand)" --apm.ipfs.rpc "http://ipfs.aragon.network:5001"
+
+cd ../finance;
+npm link @aragon/cli
+npx apm version 1.0.0 --network rpc
+npx apm publish --network rpc --no-ipfs-check --files app/build --publish-dir ../../../../published-apps/"$(../../../../scripts/rand)" --apm.ipfs.rpc "http://ipfs.aragon.network:5001"
+
+cd ../vault;
+npm link @aragon/cli
+npx apm version 1.0.0 --network rpc
+npx apm publish --network rpc --no-ipfs-check --files app/build --publish-dir ../../../../published-apps/"$(../../../../scripts/rand)" --apm.ipfs.rpc "http://ipfs.aragon.network:5001"
+
