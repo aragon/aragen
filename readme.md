@@ -20,7 +20,7 @@ If you happen to stop ganache, just:
 npm run start-ganache
 ```
 
-### Using snapshots
+### Using snapshots
 
 The Aragen package published to NPM contains a ganache snapshot that can be used to quickly start a chain with the entire Aragon system ready.
 
