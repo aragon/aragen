@@ -4,7 +4,7 @@
   "description": "Generate Aragon local dev environment snapshots",
   "main": "index.js",
   "scripts": {
-    "prepublishOnly": "exit 0 && npm run start",
+    "prepublishOnly": "npm run start",
     "start": "npm run start-ganache-bg && npm run gen",
     "gen": "npm run get-repos && scripts/deploy-base && scripts/deploy-kits && scripts/publish-apps",
     "start-ganache": "scripts/start-ganache",
@@ -17,7 +17,7 @@
     "index.js",
     "repos/*",
     "aragon-ganache",
-    "published-apps"
+    "ipfs-cache"
   ],
   "repository": {
     "type": "git",

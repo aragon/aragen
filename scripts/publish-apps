@@ -1,28 +1,19 @@
 #!/bin/bash
 
-rm -rf published-apps;
-mkdir published-apps;
+DIR=$(pwd)
+RAN=$($DIR/scripts/rand)
+IPFS_CACHE=$DIR/ipfs-cache
+IPFS_RPC="http://ipfs.aragon.network:5001"
+
+rm -rf $IPFS_CACHE;
+mkdir $IPFS_CACHE;
+
 set -e;
 
 cd repos/aragon-apps;
-cd apps/voting;
 
-npm link @aragon/cli
-npx apm version 1.0.0 --network rpc
-npx apm publish --network rpc --no-ipfs-check --files app/build --publish-dir ../../../../published-apps/"$(../../../../scripts/rand)" --apm.ipfs.rpc "http://ipfs.aragon.network:5001"
+LERNA_EXEC="lerna exec --scope=@aragon/apps-* --concurrency=1 --stream"
 
-cd ../token-manager;
-npm link @aragon/cli
-npx apm version 1.0.0 --network rpc
-npx apm publish --network rpc --no-ipfs-check --files app/build --publish-dir ../../../../published-apps/"$(../../../../scripts/rand)" --apm.ipfs.rpc "http://ipfs.aragon.network:5001"
-
-cd ../finance;
-npm link @aragon/cli
-npx apm version 1.0.0 --network rpc
-npx apm publish --network rpc --no-ipfs-check --files app/build --publish-dir ../../../../published-apps/"$(../../../../scripts/rand)" --apm.ipfs.rpc "http://ipfs.aragon.network:5001"
-
-cd ../vault;
-npm link @aragon/cli
-npx apm version 1.0.0 --network rpc
-npx apm publish --network rpc --no-ipfs-check --files app/build --publish-dir ../../../../published-apps/"$(../../../../scripts/rand)" --apm.ipfs.rpc "http://ipfs.aragon.network:5001"
-
+$LERNA_EXEC -- "npm link @aragon/cli"
+$LERNA_EXEC -- "apm version 1.0.0 --network rpc"
+$LERNA_EXEC -- "DEBUG=true apm publish --network rpc --no-ipfs-check --files app/build --publish-dir $IPFS_CACHE/\$LERNA_PACKAGE_NAME --apm.ipfs.rpc $IPFS_RPC"
