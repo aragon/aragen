@@ -1,5 +1,6 @@
 #!/bin/bash
 
-mkdir aragon-ganache/
+rm -rf aragon-ganache
+mkdir aragon-ganache
 set -e;
 npx ganache-cli -m "explain tackle mirror kit van hammer degree position ginger unfair soup bonus" -i 15 -l 100000000 --db aragon-ganache
