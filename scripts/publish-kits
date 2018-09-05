@@ -1,0 +1,11 @@
+#!/bin/bash
+
+DIR=$(pwd)
+IPFS_CACHE=$DIR/ipfs-cache
+IPFS_RPC="http://ipfs.aragon.network:5001"
+
+set -e;
+cd repos/dao-kits;
+
+npx lerna exec --stream --scope "@aragon/kits-bare" "aragon apm version 1.0.0 --network rpc"
+npx lerna exec --stream --scope "@aragon/kits-bare" "npm run publish:rpc -- --publish-dir $IPFS_CACHE/\$LERNA_PACKAGE_NAME --apm.ipfs.rpc $IPFS_RPC --no-ipfs-check"

@@ -1,6 +1,0 @@
-#!/bin/bash
-
-set -e;
-cd repos/dao-kits;
-
-npx lerna run publish:rpc

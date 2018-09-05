@@ -7,7 +7,7 @@ mkdir repos;
 cd repos;
 
 echo "Fetching aragonOS and installing dependencies..."
-git clone https://github.com/aragon/aragonOS.git -b v3.1.9;
+git clone https://github.com/aragon/aragonOS.git -b dev;
 cd aragonOS;
 npm i;
 cd ..;
@@ -19,11 +19,12 @@ npm i;
 cd ..;
 
 echo "Fetching aragon-apps and installing dependencies (this may take a while 😉)"
-git clone https://github.com/aragon/aragon-apps.git -b aragen-apps;
+git clone https://github.com/aragon/aragon-apps.git -b aragonos-4;
 cd aragon-apps;
 npm i;
+cd ..;
 
 echo "Fetching dao-kits and installing dependencies (this may also take a while 😉)"
-git clone https://github.com/aragon/dao-kits.git -b payroll-kits;
+git clone https://github.com/aragon/dao-kits.git -b bare-kit;
 cd dao-kits;
 npm i;

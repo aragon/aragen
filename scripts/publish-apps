@@ -1,7 +1,6 @@
 #!/bin/bash
 
 DIR=$(pwd)
-RAN=$($DIR/scripts/rand)
 IPFS_CACHE=$DIR/ipfs-cache
 IPFS_RPC="http://ipfs.aragon.network:5001"
 
@@ -14,6 +13,7 @@ cd repos/aragon-apps;
 
 LERNA_EXEC="lerna exec --scope=@aragon/apps-* --concurrency=1 --stream"
 
-$LERNA_EXEC -- "npm link @aragon/cli"
-$LERNA_EXEC -- "apm version 1.0.0 --network rpc"
-$LERNA_EXEC -- "DEBUG=true apm publish --network rpc --no-ipfs-check --files app/build --publish-dir $IPFS_CACHE/\$LERNA_PACKAGE_NAME --apm.ipfs.rpc $IPFS_RPC"
+$LERNA_EXEC -- "npm link @aragon/cli" # TODO: delete
+$LERNA_EXEC -- "aragon apm version 1.0.0 --network rpc"
+mkdir -p apps/vault/app/build
+$LERNA_EXEC -- "aragon apm publish --network rpc --no-ipfs-check --files app/build --publish-dir $IPFS_CACHE/\$LERNA_PACKAGE_NAME --apm.ipfs.rpc $IPFS_RPC"
