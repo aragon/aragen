@@ -7,7 +7,7 @@ mkdir repos;
 cd repos;
 
 echo "Fetching aragonOS and installing dependencies..."
-git clone https://github.com/aragon/aragonOS.git -b dev;
+git clone https://github.com/aragon/aragonOS.git -b dev; # TODO: Use master branch
 cd aragonOS;
 npm i;
 cd ..;
@@ -19,12 +19,12 @@ npm i;
 cd ..;
 
 echo "Fetching aragon-apps and installing dependencies (this may take a while 😉)"
-git clone https://github.com/aragon/aragon-apps.git -b aragonos-4;
+git clone https://github.com/aragon/aragon-apps.git -b aragonos-4-beta-1; # TODO: Use master branch
 cd aragon-apps;
 npm i;
 cd ..;
 
 echo "Fetching dao-kits and installing dependencies (this may also take a while 😉)"
-git clone https://github.com/aragon/dao-kits.git -b bare-kit;
-cd dao-kits;
+git clone https://github.com/aragon/dao-kits.git -b bare-kit; # TODO: Use master branch
+cd dao-kits/kits/bare; # TODO: install all kits when migrated to aragonOS 3
 npm i;
