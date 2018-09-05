@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "prepublishOnly": "npm run start",
-    "start": "npm run start-ganache-bg && npm run gen",
-    "gen": "npm run get-repos && scripts/deploy-base && scripts/publish-kits && scripts/publish-apps",
+    "start": "npm run start-ganache-bg && npm run get-repos && npm run gen",
+    "gen": "scripts/deploy-base && scripts/publish-kits && scripts/publish-apps",
     "start-ganache": "scripts/start-ganache",
     "start-ganache-bg": "scripts/start-ganache-bg",
     "get-repos": "scripts/get-repos",
