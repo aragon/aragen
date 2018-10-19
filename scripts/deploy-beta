@@ -1,9 +1,0 @@
-#!/bin/bash
-
-set -e;
-source scripts/set-env;
-
-cd repos/aragon-apps/templates/beta;
-npx truffle migrate --reset --network rpc
-
-echo "Beta templates deployed and packages created in APM"
