@@ -6,10 +6,12 @@
   "scripts": {
     "prepublishOnly": "npm run start",
     "start": "npm run start-ganache-bg && npm run get-repos && npm run gen",
-    "gen": "scripts/deploy-base && scripts/publish-kits && scripts/publish-apps",
+    "start:local": "npm run start-ganache-bg && npm run link-repos && npm run gen",
+    "gen": "scripts/deploy-base && scripts/publish-apps && scripts/publish-kits",
     "start-ganache": "scripts/start-ganache",
     "start-ganache-bg": "scripts/start-ganache-bg",
     "get-repos": "scripts/get-repos",
+    "link-repos": "scripts/link-repos",
     "deploy-base": "scripts/deploy-base",
     "deploy-beta": "scripts/deploy-beta"
   },
