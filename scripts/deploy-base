@@ -9,7 +9,7 @@ sleep 2; # let the people read
 echo "Deploying ENS instance"
 cd repos/aragonOS;
 npx truffle compile;
-DEPLOYED_ENS=$(npx truffle exec --network rpc scripts/deploy-beta-ens.js | tail -n 1)
+DEPLOYED_ENS=$(npx truffle exec --network rpc scripts/deploy-test-ens.js | tail -n 1)
 if [ "${ENS}" = "${DEPLOYED_ENS}" ]; then 
 	echo "ENS deployed $DEPLOYED_ENS"
 else
@@ -20,7 +20,7 @@ else
 fi
 
 echo "Deploying APM registry to aragonpm.eth"
-npx truffle exec --network rpc scripts/deploy-beta-apm.js
+npx truffle exec --network rpc scripts/deploy-apm.js
 
 cd ../aragon-id;
 echo "Deploying aragonID registry to aragonpm.eth"

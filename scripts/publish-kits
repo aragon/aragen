@@ -4,8 +4,13 @@ DIR=$(pwd)
 IPFS_CACHE=$DIR/ipfs-cache
 IPFS_RPC="http://ipfs.aragon.network:5001"
 
+source scripts/set-env;
+
 set -e;
 cd repos/dao-kits;
 
-npx lerna exec --stream --scope "@aragon/kits-bare" "aragon apm version 1.0.0 --network rpc"
-npx lerna exec --stream --scope "@aragon/kits-bare" "npm run publish:rpc -- --publish-dir $IPFS_CACHE/\$LERNA_PACKAGE_NAME --apm.ipfs.rpc $IPFS_RPC --no-ipfs-check"
+LERNA_EXEC="lerna exec --scope=@aragon/kits-bare --scope=@aragon/kits-multisig --scope=@aragon/kits-democracy --concurrency=1 --stream"
+
+$LERNA_EXEC -- "npm link @aragon/cli" # TODO: delete
+LERNA_EXEC -- "aragon apm version 1.0.0 --network rpc"
+LERNA_EXEC -- "npm run publish:rpc -- --publish-dir $IPFS_CACHE/\$LERNA_PACKAGE_NAME --apm.ipfs.rpc $IPFS_RPC --no-ipfs-check"
