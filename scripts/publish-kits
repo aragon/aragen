@@ -10,6 +10,4 @@ cd repos/dao-kits;
 
 LERNA_EXEC="lerna exec --scope=@aragon/kits-bare --scope=@aragon/kits-multisig --scope=@aragon/kits-democracy --concurrency=1 --stream"
 
-$LERNA_EXEC -- "npm link @aragon/cli" # TODO: delete
-$LERNA_EXEC -- "aragon apm version 1.0.0 --network rpc" # TODO: Delete when https://github.com/aragon/aragon-cli/pull/230 lands
 $LERNA_EXEC -- "npm run publish:rpc -- --publish-dir $IPFS_CACHE/\$LERNA_PACKAGE_NAME"
