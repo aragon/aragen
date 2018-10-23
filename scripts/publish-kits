@@ -1,0 +1,13 @@
+#!/bin/bash
+
+DIR=$(pwd)
+IPFS_CACHE=$DIR/ipfs-cache
+
+source scripts/set-env;
+
+set -e;
+cd repos/dao-kits;
+
+LERNA_EXEC="lerna exec --scope=@aragon/kits-bare --scope=@aragon/kits-multisig --scope=@aragon/kits-democracy --concurrency=1 --stream"
+
+$LERNA_EXEC -- "npm run publish:rpc -- --publish-dir $IPFS_CACHE/\$LERNA_PACKAGE_NAME"
