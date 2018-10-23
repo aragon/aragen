@@ -27,10 +27,15 @@ exports.builder = {
   accounts: {
     default: 2,
     description: 'Number of accounts to print'
+  },
+  verbose: {
+    default: false,
+    type: 'boolean',
+    description: 'Enable verbose devchain output'
   }
 }
 
-exports.task = async function ({ port = 8545, reset = false, showAccounts = 2 }) {
+exports.task = async function ({ port = 8545, verbose = false, reset = false, showAccounts = 2, reporter }) {
   const removeDir = promisify(rimraf)
   const mkDir = promisify(mkdirp)
   const recursiveCopy = promisify(ncp)
@@ -57,7 +62,8 @@ exports.task = async function ({ port = 8545, reset = false, showAccounts = 2 })
           network_id: parseInt(1e8 * Math.random()),
           gasLimit: BLOCK_GAS_LIMIT,
           mnemonic: MNEMONIC,
-          db_path: snapshotPath
+          db_path: snapshotPath,
+          logger: verbose ? { log: reporter.info.bind(reporter) } : undefined
         })
         const listen = () => (
           new Promise((resolve, reject) => {
@@ -115,8 +121,8 @@ exports.printResetNotice = (reporter, reset) => {
   }
 }
 
-exports.handler = async ({ reporter, port, reset, accounts }) => {
-  const task = await exports.task({ port, reset, showAccounts: accounts })
+exports.handler = async ({ reporter, port, reset, verbose, accounts }) => {
+  const task = await exports.task({ port, reset, verbose, reporter, showAccounts: accounts })
   const { privateKeys, mnemonic } = await task.run()
   exports.printAccounts(reporter, privateKeys)
   exports.printMnemonic(reporter, mnemonic)
