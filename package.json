@@ -17,7 +17,6 @@
   },
   "files": [
     "index.js",
-    "repos/*",
     "aragon-ganache",
     "ipfs-cache"
   ],
