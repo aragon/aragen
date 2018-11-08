@@ -8,13 +8,12 @@ node_js:
 - '8'
 before_script:
 - npm prune
-# before_deploy: "echo 'Starting publish to NPM'"
-# deploy:
-#  provider: npm
-#  email: jorge@aragon.one
-#  api_key:
-#    secure: V2Jswh8t6ujnX8cUAQunw2pMNfixRi0sp95fdu/VGabTRXbNmR5YNDza0CndcXo4iu0tvp5S8YJF0HfkuhqdkbpmOXeqOqZPzGkFzGlMs5TSFJL7aVpfTK9PVVxhOPiqc28OexnEhvNk5xqr1DqCI/9o2hmsp203MtueQHZiEGi6aWL4tPjNtfz8vZJfG8z0PHmqYZlgSHCZDtGAgVPVOWgHZPjQjUglB3mqr1StTbwaTa1GsWqRMOMtpixQrpvdu8LNbPDOd+XMSvrNUEgpLlpI17bbxKj0AvjoNoyG4fH8o9bXUKouWny51YnKrMyt6fwk3UgFpE7jnFrmb3OG4g1gLuWckB1dJLXioIoxLt19ZuEwoXVA8SVyTV2FViQuTDkaf+WVh8VYLaUgMoBrTmxraNaQXiUdXKYNsRiH1N2/+EHuWMmHRBLbRFFaTYNFhiPEIds5cnYGYGn5EZG4dm96pTa8Z+TtWl0Kg7BwKxYWsAmcneYcDskbrIeHcXp+Xjbl1eohXhC8NvDmet89h4pNz2Rf0izzexlEF+f0n9q3JZRJTrWY61uo5KY5amhJIeHX9/Fd+jTuCtEc2ICgm+mhyH6jyt847OqLNSSPSaSYceZwEmoGNTsqGU7b0vWBryM6v/dktZ+wWN0aYM6xX7oLkIJ+Z/A+JjhwVH29gV0=
-#  skip_cleanup: true
-#  on:
-#    branch: master
-
+before_deploy: echo 'Starting publish to NPM'
+deploy:
+  provider: npm
+  email: jorge+npmci@aragon.one
+  api_key:
+    secure: UO/9KUzMStVfgR+pOjURKK+mCrjVsP2a9GhrbpclL9yCGyylHe0uyGX5/pF+crMHoSjgYoew00UZgKEfzSIdYiR7h2hs5J+wcTOnSjapevL4/NA0C608fQOilb7Fj5vmxSuYTjZHCUvEcmTVmGU+zpw+YHYtyl5rmONwWZXHKQzKSPflzl0rJL+HMTgJYjbOB3RqxwK7kcW58wWkJl+x1aFxK1KMTnqUHS8FOITo1c7Gn0wPEPSPogzkXh8RVOpA4xkNbOP2gqqfpfuzBuDhULK1MBxvnSnuvaXBHAFaF1a++wj65+f3mo8zpHOIm6n/rcAbQC5siRHZph83K4oszdPf+oxRXneuezFogdoHlUdKUFy7Kdmca/HYYZDlstH3ERrC/apKyh4+5MG7ElCf1V8xItG1XySbLpMnCs0EYsxnoo1XtLeIBJop2nPbsrpBQULkq6Z7zn+tIU8SSAd5hqnfsa+pkvMKbPirzhy7xdyhK2iV97P+y0EkEEI4MOhjGRbyHOyS5ATeXbKb+l3ZcooJ6+rJz9YvjVsF4Ivy0RDfdADKKR1RLQ3Pw1/MBooTGBAUuw4/RopO5h4h2ivyNpfxkWikS86fn8nyZrGZGQe1lJOIgZ8GEtUppYhmd70jilaY5VGRelXQGYrFt+eBAiDcqYGeMDmOa8ZaTjFSS9k=
+  on:
+    branch: master
+    repo: aragon/aragen
