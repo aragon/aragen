@@ -10,7 +10,7 @@ set -e;
 
 cd repos/aragon-apps;
 
-LERNA_EXEC="lerna exec --scope=@aragon/apps-finance --scope=@aragon/apps-voting --scope=@aragon/apps-token-manager --scope=@aragon/apps-vault --concurrency=1 --stream"
+LERNA_EXEC="npx lerna exec --scope=@aragon/apps-finance --scope=@aragon/apps-voting --scope=@aragon/apps-token-manager --scope=@aragon/apps-vault --concurrency=1 --stream"
 
 mkdir -p apps/vault/app/build
 $LERNA_EXEC -- "aragon apm publish 1.0.0 --environment default --files app/build --publish-dir $IPFS_CACHE/\$LERNA_PACKAGE_NAME"
