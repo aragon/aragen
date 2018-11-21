@@ -35,7 +35,7 @@
   "homepage": "https://github.com/aragon/aragen#readme",
   "devDependencies": {
     "@aragon/cli": "^4.0.0-rc.14",
-    "ganache-cli": "^6.1.0",
+    "ganache-cli": "^6.2.1",
     "truffle": "4.0.5"
   },
   "publishConfig": {
