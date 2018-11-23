@@ -3,3 +3,4 @@ repos
 aragon-ganache
 nohup.out
 ipfs-cache
+package-lock.json
