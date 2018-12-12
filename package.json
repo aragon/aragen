@@ -24,7 +24,7 @@
     "type": "git",
     "url": "git+https://github.com/aragon/aragen.git"
   },
-  "author": "Aragon One AG",
+  "author": "Aragon Association <legal@aragon.org>",
   "contributors": [
     "Jorge Izquierdo <jorge@aragon.one>"
   ],
