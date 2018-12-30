@@ -3,6 +3,9 @@
   "version": "3.0.0",
   "description": "Generate Aragon local dev environment snapshots",
   "main": "index.js",
+  "bin": {
+    "aragen": "./src/cli.js"
+  },
   "scripts": {
     "prepublishOnly": "npm run start",
     "start": "npm run start-ganache-bg && npm run get-repos && npm run gen",
@@ -33,6 +36,18 @@
     "url": "https://github.com/aragon/aragen/issues"
   },
   "homepage": "https://github.com/aragon/aragen#readme",
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "chalk": "^2.1.0",
+    "figures": "^2.0.0",
+    "ganache-core": "^2.1.6",
+    "listr": "^0.13.0",
+    "ncp": "^2.0.0",
+    "mkdirp": "^0.5.1",
+    "rimraf": "^2.6.2",
+    "web3": "^1.0.0-beta.34",
+    "yargs": "^10.1.0"
+  },
   "devDependencies": {
     "@aragon/cli": "^4.0.0-rc.14",
     "ganache-cli": "^6.2.1",
