@@ -36,7 +36,7 @@ To use directly with ganache-cli:
 
 ```
 npm install @aragon/aragen
-ganache-cli --db node_modules/@aragon/aragen/aragon-ganache -m "explain tackle mirror kit van hammer degree position ginger unfair soup bonus" -i 15 -l 100000000
+npx aragen devchain
 ```
 
 If you wish to access from code, for example to run ganache-core directly:
