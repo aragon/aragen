@@ -40,7 +40,7 @@
     "@babel/polyfill": "^7.0.0",
     "chalk": "^2.1.0",
     "figures": "^2.0.0",
-    "ganache-core": "^2.1.6",
+    "ganache-core": "^2.3.2",
     "listr": "^0.13.0",
     "ncp": "^2.0.0",
     "mkdirp": "^0.5.1",
