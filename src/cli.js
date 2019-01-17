@@ -28,14 +28,6 @@ cmd.option('debug', {
   },
 })
 
-// APM
-cmd.option('apm.ens-registry', {
-  description:
-    "Address of the ENS registry. This will be overwritten if the selected '--environment' from your arapp.json includes a `registry` property",
-  default: require('../index').ens,
-})
-cmd.group(['apm.ens-registry'], 'APM:')
-
 // Run
 const reporter = new ConsoleReporter()
 // reporter.debug(JSON.stringify(process.argv))

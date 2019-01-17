@@ -1,9 +1,9 @@
 #!/bin/bash
 
-BASEPATH="$( dirname "$(dirname "$0")" )"
-mnemonic=$(node -p "require(require('path').join(\"${SCRIPTPATH}\", '../src/helpers/ganache-vars')).MNEMONIC")
+cd $(dirname $0)/..
+BASEPATH=$(pwd)
+mnemonic=$(node -p "require(require('path').join(\"${BASEPATH}\", 'src/helpers/ganache-vars')).MNEMONIC")
 
-cd "$BASEPATH"
 rm -rf aragon-ganache
 mkdir aragon-ganache
 set -e;
