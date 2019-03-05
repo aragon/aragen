@@ -1,6 +1,10 @@
 #!/bin/bash
 
+cd $(dirname $0)/..
+BASEPATH=$(pwd)
+mnemonic=$(node -p "require(require('path').join(\"${BASEPATH}\", 'src/helpers/ganache-vars')).MNEMONIC")
+
 rm -rf aragon-ganache
 mkdir aragon-ganache
 set -e;
-npx ganache-cli -m "explain tackle mirror kit van hammer degree position ginger unfair soup bonus" -i 15 -l 100000000 --db aragon-ganache
+npx ganache-cli -m "${mnemonic}" -i 15 -l 100000000 --db aragon-ganache
