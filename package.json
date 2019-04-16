@@ -1,6 +1,6 @@
 {
   "name": "@aragon/aragen",
-  "version": "3.0.0-beta.1",
+  "version": "4.0.0-beta.1",
   "description": "Generate Aragon local dev environment snapshots",
   "main": "index.js",
   "bin": {
@@ -21,11 +21,12 @@
   "files": [
     "index.js",
     "aragon-ganache",
-    "ipfs-cache"
+    "ipfs-cache",
+    "src"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aragon/aragen.git"
+    "url": "https://github.com/aragon/aragen.git"
   },
   "author": "Aragon Association <legal@aragon.org>",
   "contributors": [
