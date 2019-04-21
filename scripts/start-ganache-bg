@@ -1,9 +1,0 @@
-#!/bin/bash
-
-set +e;
-kill -9 $(lsof -t -i:8545);
-set -e;
-
-echo "Starting ganache in the background";
-
-nohup npm run start-ganache &
