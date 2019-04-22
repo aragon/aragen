@@ -115,7 +115,7 @@ module.exports = async (
 
   log(`Assigning ENS name (${labelName}.${tldName}) to factory...`)
 
-  if ((await ens.owner(apmNode)) === accounts[0]) {
+  if ((await ens.owner(apmNode)) === owner) {
     log('Transferring name ownership from deployer to APMRegistryFactory')
     await ens.setOwner(apmNode, apmFactory.address)
   } else {

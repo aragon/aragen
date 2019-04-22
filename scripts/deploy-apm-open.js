@@ -37,7 +37,7 @@ module.exports = async (
   const tldHash = namehash(tldName)
   const labelHash = '0x' + keccak256(labelName)
 
-  // wrap deploy-apm
+  // deploy `aragonpm.eth`
   const { apmFactory, ens, apm } = await deployAPM(null, {
     artifacts,
     web3,
