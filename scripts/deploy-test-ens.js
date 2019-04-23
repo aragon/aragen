@@ -1,4 +1,4 @@
-const logDeploy = require('./helpers/deploy-logger')
+const logDeploy = require('@aragon/os/scripts/helpers/deploy-logger')
 const getAccounts = require('./helpers/get-accounts')
 
 const globalArtifacts = this.artifacts // Not injected unless called directly via truffle

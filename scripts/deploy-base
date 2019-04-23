@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# TODO: Update after change artifacts directory
-
 set -e;
 source scripts/set-env;
 
