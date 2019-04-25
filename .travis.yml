@@ -3,8 +3,11 @@ notifications:
   email: true
 node_js:
   - '8'
+install:
+  - npm run start-ganache-bg
+  - travis_wait 60 npm run get-repos
+  - travis_wait 60 npm run gen
 before_script:
-  - travis_wait 60 npm run start
   - npm prune
 before_deploy: echo 'Starting publish to NPM'
 deploy:
