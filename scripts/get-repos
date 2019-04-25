@@ -16,7 +16,7 @@ echo "Fetching aragon-apps and installing dependencies (this may take a while ðŸ
 
 git clone https://github.com/aragon/aragon-apps.git -b master;
 cd aragon-apps;
-npm i;
+INSTALL_FRONTEND=true npm i;
 cd ..;
 
 echo "Fetching dao-kits and installing dependencies (this may also take a while ðŸ˜‰)"

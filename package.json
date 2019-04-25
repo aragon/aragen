@@ -51,7 +51,7 @@
     "@aragon/cli": "^5.0.0",
     "@aragon/os": "^4.2.0",
     "eth-ens-namehash": "^2.0.8",
-    "ganache-cli": "^6.2.1",
+    "ganache-cli": "6.2.5",
     "truffle": "4.1.14"
   },
   "publishConfig": {
