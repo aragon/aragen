@@ -5,9 +5,8 @@ node_js:
   - '8'
 install:
   - npm install
-  - npm run start-ganache-bg
   - travis_wait 60 npm run get-repos
-  - travis_wait 60 npm run gen
+  - npm run start-ganache-bg && npm run gen
 before_script:
   - npm prune
 before_deploy: echo 'Starting publish to NPM'
