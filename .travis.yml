@@ -4,6 +4,7 @@ notifications:
 node_js:
   - '8'
 install:
+  - npm install
   - npm run start-ganache-bg
   - travis_wait 60 npm run get-repos
   - travis_wait 60 npm run gen
