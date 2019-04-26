@@ -7,6 +7,7 @@
     "aragen": "./src/cli.js"
   },
   "scripts": {
+    "prepublishOnly": "npm run start",
     "start": "npm run start-ganache-bg && npm run get-repos && npm run gen",
     "start:local": "npm run start-ganache-bg && npm run link-repos && npm run gen",
     "gen": "scripts/deploy-base && scripts/publish-apps && scripts/publish-kits",
