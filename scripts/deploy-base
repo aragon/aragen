@@ -7,10 +7,9 @@ echo "Make sure you are on an empty chain running with the default mnemonic"
 sleep 2; # let the people read
 
 echo "Deploying ENS instance"
-cd repos/aragonOS;
 npx truffle compile;
 DEPLOYED_ENS=$(npx truffle exec --network rpc scripts/deploy-test-ens.js | tail -n 1)
-if [ "${ENS}" = "${DEPLOYED_ENS}" ]; then 
+if [ "${ENS}" = "${DEPLOYED_ENS}" ]; then
 	echo "ENS deployed $DEPLOYED_ENS"
 else
 	echo >&2 "ENS address missmatch. Please restart ganache by running:";
@@ -19,10 +18,10 @@ else
 	exit 1;
 fi
 
-echo "Deploying APM registry to aragonpm.eth"
-npx truffle exec --network rpc scripts/deploy-apm.js
+echo "Deploying APM registry to aragonpm.eth and open.aragonpm.eth"
+npx truffle exec --network rpc scripts/deploy-apm-open.js
 
-cd ../aragon-id;
+cd repos/aragon-id;
 echo "Deploying aragonID registry to aragonpm.eth"
 npx truffle compile;
 npx truffle exec --network rpc scripts/deploy-beta-aragonid.js;
