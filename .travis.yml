@@ -3,13 +3,15 @@ notifications:
   email: true
 node_js:
   - '8'
-before_script:
-  - npm prune
-before_deploy:
-  - echo 'Starting publish to NPM'
+install:
+  - npm install
   - travis_wait 60 npm run get-repos
   - npm run start-ganache-bg && npm run gen
+before_script:
+  - npm prune
+before_deploy: echo 'Starting publish to NPM'
 deploy:
+  skip_cleanup: true
   provider: npm
   email: jorge+npmci@aragon.one
   api_key:
