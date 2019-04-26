@@ -11,6 +11,7 @@ before_script:
   - npm prune
 before_deploy: echo 'Starting publish to NPM'
 deploy:
+  skip_cleanup: true
   provider: npm
   email: jorge+npmci@aragon.one
   api_key:
