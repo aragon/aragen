@@ -4,3 +4,5 @@ aragon-ganache
 nohup.out
 ipfs-cache
 package-lock.json
+build
+flattened_contracts
