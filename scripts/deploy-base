@@ -21,7 +21,5 @@ fi
 echo "Deploying APM registry to aragonpm.eth and open.aragonpm.eth"
 npx truffle exec --network rpc scripts/deploy-apm-open.js
 
-cd repos/aragon-id;
 echo "Deploying aragonID registry to aragonpm.eth"
-npx truffle compile;
 npx truffle exec --network rpc scripts/deploy-beta-aragonid.js;
