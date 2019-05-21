@@ -1,4 +1,4 @@
-# AraGen [![Build Status](https://travis-ci.org/aragon/aragen.svg?branch=master)](https://travis-ci.org/aragon/aragen) [![npm](https://img.shields.io/npm/v/@aragon/aragen.svg?style=for-the-badge)](https://www.npmjs.com/package/@aragon/aragen)
+# AraGen [![Build Status](https://travis-ci.org/aragon/aragen.svg?branch=master)](https://travis-ci.org/aragon/aragen) [![npm](https://img.shields.io/npm/v/@aragon/aragen.svg?style=for-the-badge)](https://www.npmjs.com/package/@aragon/aragen) [![Greenkeeper badge](https://badges.greenkeeper.io/aragon/aragen.svg)](https://greenkeeper.io/)
 
 Generate an Aragon environment
 
