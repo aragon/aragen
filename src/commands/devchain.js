@@ -53,7 +53,7 @@ exports.task = async function({
 
   const snapshotPath = path.join(
     os.homedir(),
-    `.aragon/ganache-db-${pjson.version}`
+    `.aragon/aragen-db-${pjson.version}`
   )
 
   const tasks = new TaskList(
