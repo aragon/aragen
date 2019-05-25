@@ -56,5 +56,12 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "greenkeeper": {
+    "ignore": [
+      "ganache-core",
+      "truffle",
+      "web3"
+    ]
   }
 }
