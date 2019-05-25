@@ -9,6 +9,9 @@ import "@aragon/os/contracts/apm/APMRegistry.sol";
 import "@aragon/os/contracts/apm/Repo.sol";
 import "@aragon/os/contracts/ens/ENSSubdomainRegistrar.sol";
 import "@aragon/os/contracts/lib/ens/ENS.sol";
+import "@aragon/os/contracts/lib/ens/AbstractENS.sol";
+
+import "@aragon/id/contracts/FIFSResolvingRegistrar.sol";
 
 
 // You might think this file is a bit odd, but let me explain.
