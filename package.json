@@ -45,14 +45,13 @@
     "ncp": "^2.0.0",
     "rimraf": "^2.6.2",
     "web3": "1.0.0-beta.37",
-    "yargs": "^13.2.4"
+    "yargs": "^12.0.0"
   },
   "devDependencies": {
-    "@aragon/cli": "^5.0.0",
     "@aragon/id": "^2.0.0",
     "@aragon/os": "^4.2.0",
     "eth-ens-namehash": "^2.0.8",
-    "ganache-cli": "6.4.3",
+    "ganache-cli": "^6.4.3",
     "truffle": "4.1.14"
   },
   "publishConfig": {
@@ -62,7 +61,8 @@
     "ignore": [
       "ganache-core",
       "truffle",
-      "web3"
+      "web3",
+      "yargs"
     ]
   }
 }
