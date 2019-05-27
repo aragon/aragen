@@ -51,7 +51,7 @@
     "@aragon/id": "^2.0.0",
     "@aragon/os": "^4.2.0",
     "eth-ens-namehash": "^2.0.8",
-    "ganache-cli": "^6.4.3",
+    "ganache-cli": "~6.2.0",
     "truffle": "4.1.14"
   },
   "publishConfig": {
@@ -60,6 +60,7 @@
   "greenkeeper": {
     "ignore": [
       "ganache-core",
+      "ganache-cli",
       "truffle",
       "web3",
       "yargs"
