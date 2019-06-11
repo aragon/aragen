@@ -1,6 +1,6 @@
 {
   "name": "@aragon/aragen",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "description": "Generate Aragon local dev environment snapshots",
   "main": "index.js",
   "bin": {
@@ -9,13 +9,12 @@
   "scripts": {
     "start": "npm run start-ganache-bg && npm run get-repos && npm run gen",
     "start:local": "npm run start-ganache-bg && npm run link-repos && npm run gen",
-    "gen": "scripts/deploy-base && scripts/publish-apps && scripts/publish-kits",
+    "gen": "scripts/deploy-base && scripts/publish-apps && scripts/publish-templates",
     "start-ganache": "scripts/start-ganache",
     "start-ganache-bg": "scripts/start-ganache-bg",
     "get-repos": "scripts/get-repos",
     "link-repos": "scripts/link-repos",
-    "deploy-base": "scripts/deploy-base",
-    "deploy-beta": "scripts/deploy-beta"
+    "deploy-base": "scripts/deploy-base"
   },
   "files": [
     "index.js",
@@ -48,6 +47,7 @@
     "yargs": "^12.0.0"
   },
   "devDependencies": {
+    "@aragon/cli": "^5.0.0",
     "@aragon/id": "^2.0.0",
     "@aragon/os": "^4.2.0",
     "eth-ens-namehash": "^2.0.8",
