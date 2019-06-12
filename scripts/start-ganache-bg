@@ -1,9 +1,15 @@
 #!/bin/bash
 
-set +e;
-kill -9 $(lsof -t -i:8545);
-set -e;
+ganache_port=8545
+ganache_running() {
+  nc -z localhost "$ganache_port" &> /dev/null
+}
 
-echo "Starting ganache in the background";
+if ganache_running; then
+  echo "Killing ganache instance at port $ganache_port"
+  kill -9 $(lsof -t -i:$ganache_port);
+fi
+
+printf "Starting ganache in the background\n\n";
 
 nohup npm run start-ganache &
