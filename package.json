@@ -13,8 +13,8 @@
     "start-ganache-bg": "scripts/start-ganache-bg",
     "gen": "scripts/get-repos",
     "link-repos": "scripts/link-repos",
-    "depoly": "scripts/deploy-base && scripts/publish-apps && scripts/publish-templates",
-    "depoly-base": "scripts/deploy-base",
+    "deploy": "scripts/deploy-base && scripts/publish-apps && scripts/publish-templates",
+    "deploy-base": "scripts/deploy-base",
     "publish-apps": "scripts/publish-apps",
     "publish-templates": "scripts/publish-templates"
   },
