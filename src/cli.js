@@ -4,12 +4,9 @@ const ConsoleReporter = require('./reporters/ConsoleReporter')
 
 // Set up commands
 const cmd = require('yargs')
+  .strict()
   .parserConfiguration({
-    'short-option-groups': true,
-    'camel-case-expansion': true,
-    'dot-notation': true,
     'parse-numbers': false,
-    'boolean-negation': true,
   })
   .commandDir('./commands')
 
