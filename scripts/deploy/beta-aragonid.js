@@ -9,7 +9,7 @@ const defaultOwner = process.env.OWNER
 const defaultENSAddress = process.env.ENS
 
 const tld = namehash('eth')
-const label = '0x'+keccak256('aragonid')
+const label = '0x' + keccak256('aragonid')
 const node = namehash('aragonid.eth')
 
 module.exports = async (
@@ -19,11 +19,13 @@ module.exports = async (
     web3 = globalWeb3,
     ensAddress = defaultENSAddress,
     owner = defaultOwner,
-    verbose = true
+    verbose = true,
   } = {}
 ) => {
   const log = (...args) => {
-    if (verbose) { console.log(...args) }
+    if (verbose) {
+      console.log(...args)
+    }
   }
 
   const accounts = await getAccounts(web3)
@@ -32,14 +34,20 @@ module.exports = async (
   const FIFSResolvingRegistrar = artifacts.require('FIFSResolvingRegistrar')
   const ENS = artifacts.require('AbstractENS')
 
-  const publicResolver = await ENS.at(ensAddress).resolver(namehash('resolver.eth'))
-  const aragonID = await FIFSResolvingRegistrar.new(ensAddress, publicResolver, node)
+  const publicResolver = await ENS.at(ensAddress).resolver(
+    namehash('resolver.eth')
+  )
+  const aragonID = await FIFSResolvingRegistrar.new(
+    ensAddress,
+    publicResolver,
+    node
+  )
   await logDeploy(aragonID, { verbose })
 
   log('assigning ENS name to AragonID')
   const ens = ENS.at(ensAddress)
 
-  if (await ens.owner(node) === accounts[0]) {
+  if ((await ens.owner(node)) === accounts[0]) {
     log('Transferring name ownership from deployer to AragonID')
     await ens.setOwner(node, aragonID.address)
   } else {
@@ -57,7 +65,7 @@ module.exports = async (
 
   if (owner) {
     log('assigning owner name')
-    await aragonID.register('0x'+keccak256('owner'), owner)
+    await aragonID.register('0x' + keccak256('owner'), owner)
   }
 
   log('===========')

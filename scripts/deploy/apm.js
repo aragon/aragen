@@ -1,8 +1,8 @@
 const namehash = require('eth-ens-namehash').hash
 const keccak256 = require('js-sha3').keccak_256
 
-const deployENS = require('./deploy-test-ens')
-const deployDaoFactory = require('./deploy-daofactory')
+const deployENS = require('./test-ens')
+const deployDaoFactory = require('./daofactory')
 const logDeploy = require('@aragon/os/scripts/helpers/deploy-logger')
 const getAccounts = require('./helpers/get-accounts')
 

@@ -17,3 +17,8 @@ echo "Fetching dao-kits and installing dependencies (this may also take a while 
 git clone https://github.com/aragon/dao-kits.git -b master;
 cd dao-kits;
 npm i;
+
+# echo "Fetching aragon client and installing dependencies"
+# git clone https://github.com/aragon/aragon.git -b master;
+# cd aragon;
+# npm i;

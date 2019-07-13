@@ -7,13 +7,14 @@
     "aragen": "./src/cli.js"
   },
   "scripts": {
+    "postinstall": "npm run gen",
     "start": "npm run start-ganache-bg && npm run deploy",
     "start:local": "npm run start-ganache-bg && npm run link-repos && npm run deploy",
+    "deploy": "npm run deploy-base && npm run publish-apps && npm run publish-templates",
     "start-ganache": "scripts/start-ganache",
     "start-ganache-bg": "scripts/start-ganache-bg",
     "gen": "scripts/get-repos",
     "link-repos": "scripts/link-repos",
-    "deploy": "scripts/deploy-base && scripts/publish-apps && scripts/publish-templates",
     "deploy-base": "scripts/deploy-base",
     "publish-apps": "scripts/publish-apps",
     "publish-templates": "scripts/publish-templates"
@@ -38,22 +39,22 @@
   },
   "homepage": "https://github.com/aragon/aragen#readme",
   "dependencies": {
-    "@babel/polyfill": "^7.0.0",
     "chalk": "^2.1.0",
+    "core-js": "^3.1.4",
     "figures": "^3.0.0",
-    "ganache-core": "2.5.3",
+    "ganache-core": "^2.5.7",
     "listr": "^0.14.3",
     "ncp": "^2.0.0",
     "rimraf": "^2.6.2",
-    "web3": "1.0.0-beta.35",
+    "web3": "1.0.0-beta.37",
     "yargs": "^13.2.4"
   },
   "devDependencies": {
-    "@aragon/cli": "^5.0.0",
+    "@aragon/cli": "^6.0.0",
     "@aragon/id": "^2.0.0",
     "@aragon/os": "^4.2.0",
     "eth-ens-namehash": "^2.0.8",
-    "ganache-cli": "~6.2.0",
+    "ganache-cli": "^6.4.2",
     "truffle": "4.1.14"
   },
   "publishConfig": {

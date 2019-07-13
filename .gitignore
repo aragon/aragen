@@ -1,8 +1,14 @@
+# Dependencies
 node_modules
-repos
-aragon-ganache
+
 nohup.out
-ipfs-cache
 package-lock.json
+
+# build
+repos
 build
 flattened_contracts
+
+# snapshot
+aragon-ganache
+ipfs-cache

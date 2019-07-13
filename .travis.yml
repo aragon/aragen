@@ -4,9 +4,8 @@ notifications:
 node_js:
   - '8'
 install:
-  - npm install
-  - travis_wait 60 npm run gen
-  - npm run start-ganache-bg && npm run deploy
+  - travis_wait 60 npm install
+  - npm run start
 before_script:
   - npm prune
 before_deploy: echo 'Starting publish to NPM'
