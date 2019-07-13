@@ -1,0 +1,9 @@
+#!/bin/bash
+
+DIR=$(pwd)
+IPFS_CACHE=$DIR/ipfs-cache
+
+set -e;
+cd repos/aragon;
+
+npm run publish:major -- --publish-dir $IPFS_CACHE/@aragon/aragon --skip-confirmation --no-propagate-content --no-build;

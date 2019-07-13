@@ -10,14 +10,15 @@
     "postinstall": "npm run gen",
     "start": "npm run start-ganache-bg && npm run deploy",
     "start:local": "npm run start-ganache-bg && npm run link-repos && npm run deploy",
-    "deploy": "npm run deploy-base && npm run publish-apps && npm run publish-templates",
+    "deploy": "npm run deploy-base && npm run publish-apps && npm run publish-templates && npm run publish-client",
     "start-ganache": "scripts/start-ganache",
     "start-ganache-bg": "scripts/start-ganache-bg",
     "gen": "scripts/get-repos",
     "link-repos": "scripts/link-repos",
     "deploy-base": "scripts/deploy-base",
     "publish-apps": "scripts/publish-apps",
-    "publish-templates": "scripts/publish-templates"
+    "publish-templates": "scripts/publish-templates",
+    "publish-client": "scripts/publish-client"
   },
   "files": [
     "index.js",
@@ -62,8 +63,6 @@
   },
   "greenkeeper": {
     "ignore": [
-      "ganache-core",
-      "ganache-cli",
       "truffle",
       "web3"
     ]
