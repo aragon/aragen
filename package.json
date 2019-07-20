@@ -40,9 +40,9 @@
   },
   "homepage": "https://github.com/aragon/aragen#readme",
   "dependencies": {
+    "@aragon/cli-utils": "^0.0.1",
     "chalk": "^2.1.0",
     "core-js": "^3.1.4",
-    "figures": "^3.0.0",
     "ganache-core": "^2.5.7",
     "listr": "^0.14.3",
     "ncp": "^2.0.0",

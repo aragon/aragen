@@ -9,7 +9,7 @@ const rimraf = require('rimraf')
 const mkdirp = require('mkdirp')
 const chalk = require('chalk')
 const fs = require('fs')
-const listrOpts = require('../helpers/listr-options')
+const listrOpts = require('@aragon/cli-utils/src/helpers/listr-options')
 const pjson = require('../../package.json')
 
 const { BLOCK_GAS_LIMIT, MNEMONIC } = require('../helpers/ganache-vars')
@@ -85,7 +85,9 @@ exports.task = async function({
               server.listen(port, err => {
                 if (err) return reject(err)
 
-                task.title = `Local chain started at port ${port}`
+                task.title = `Local chain started at port ${chalk.blue(
+                  port.toString
+                )}`
                 resolve()
               })
             })
@@ -122,7 +124,7 @@ exports.printAccounts = (reporter, privateKeys) => {
   const formattedAccounts = privateKeys.map(
     ({ address, key }, i) =>
       chalk.bold(
-        `Address #${i + 1}:  ${address} ${
+        `Address #${i + 1}:  ${chalk.green(address.toString)} ${
           i === 0 ? firstAccountComment : ''
         }\nPrivate key: `
       ) + key
@@ -136,7 +138,9 @@ exports.printAccounts = (reporter, privateKeys) => {
 
 exports.printMnemonic = (reporter, mnemonic) => {
   reporter.info(
-    `The accounts were generated from the following mnemonic phrase:\n${mnemonic}\n`
+    `The accounts were generated from the following mnemonic phrase:\n${chalk.blue(
+      mnemonic.toString
+    )}\n`
   )
 }
 
@@ -144,7 +148,7 @@ exports.printResetNotice = (reporter, reset) => {
   if (reset) {
     reporter.warning(`The devchain was reset, some steps need to be done to prevent issues:
     - Reset the application cache in Aragon Core by going to Settings > Troubleshooting.
-    - If using Metamask: switch to a different network, and then switch back to the 'Private Network' (this will clear the nonce cache and prevent errors when sending transactions)  
+    - If using Metamask: switch to a different network, and then switch back to the 'Private Network' (this will clear the nonce cache and prevent errors when sending transactions)
   `)
   }
 }
@@ -173,8 +177,12 @@ exports.handler = async ({
   exports.printResetNotice(reporter, reset)
 
   reporter.info(
-    `ENS instance deployed at 0x5f6f7e8cc7346a11ca2def8f827b7a0b612c56a1\n`
+    `ENS instance deployed at ${chalk.blue(
+      '0x5f6f7e8cc7346a11ca2def8f827b7a0b612c56a1'
+    )}\n`
   )
 
-  reporter.info(`Devchain running: ${chalk.bold('http://localhost:' + port)}.`)
+  reporter.info(
+    `Devchain running: ${chalk.blue(chalk.bold('http://localhost:' + port))}.`
+  )
 }
