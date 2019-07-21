@@ -6,7 +6,7 @@ IPFS_CACHE=$DIR/ipfs-cache
 source scripts/set-env;
 
 set -e;
-cd repos/dao-kits;
+cd repos/dao-templates;
 
 LERNA_EXEC="npx lerna exec --scope=@aragon/templates-bare --scope=@aragon/templates-democracy --scope=@aragon/templates-multisig --scope=@aragon/templates-trust --concurrency=1 --stream"
 

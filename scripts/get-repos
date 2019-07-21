@@ -13,9 +13,9 @@ cd aragon-apps;
 INSTALL_FRONTEND=true npm i;
 cd ..;
 
-echo "Fetching dao-kits and installing dependencies (this may also take a while 😉)"
-git clone https://github.com/aragon/dao-kits.git -b master;
-cd dao-kits;
+echo "Fetching dao-templates and installing dependencies (this may also take a while 😉)"
+git clone https://github.com/aragon/dao-templates.git -b next;
+cd dao-templates;
 npm i;
 cd ..;
 

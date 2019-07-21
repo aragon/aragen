@@ -1,6 +1,5 @@
 #!/usr/bin/env node
-import 'core-js/stable'
-import 'regenerator-runtime/runtime'
+require('@babel/polyfill')
 const ConsoleReporter = require('@aragon/cli-utils/src/reporters/ConsoleReporter')
 
 // Set up commands

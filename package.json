@@ -7,7 +7,6 @@
     "aragen": "./src/cli.js"
   },
   "scripts": {
-    "postinstall": "npm run gen",
     "start": "npm run start-ganache-bg && npm run deploy",
     "start:local": "npm run start-ganache-bg && npm run link-repos && npm run deploy",
     "deploy": "npm run deploy-base && npm run publish-apps && npm run publish-templates && npm run publish-client",
@@ -40,7 +39,8 @@
   },
   "homepage": "https://github.com/aragon/aragen#readme",
   "dependencies": {
-    "@aragon/cli-utils": "^0.0.1",
+    "@aragon/cli-utils": "^0.0.2",
+    "@babel/polyfill": "^7.0.0",
     "chalk": "^2.1.0",
     "core-js": "^3.1.4",
     "ganache-core": "^2.5.7",
