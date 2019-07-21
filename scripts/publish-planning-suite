@@ -1,0 +1,15 @@
+#!/bin/bash
+
+DIR=$(pwd)
+IPFS_CACHE=$DIR/ipfs-cache
+
+rm -rf $IPFS_CACHE;
+mkdir $IPFS_CACHE;
+
+set -e;
+
+cd repos/planning-suite;
+
+LERNA_EXEC_APPS="npx lerna exec --scope=@aragon/apps-address-book --scope=@aragon/apps-allocations --scope=@aragon/apps-dot-voting --scope=@aragon/apps-projects --scope=@aragon/apps-rewards --concurrency=1 --stream"
+
+$LERNA_EXEC_APPS -- "aragon apm publish 1.0.0 --files dist/ --publish-dir $IPFS_CACHE/\$LERNA_PACKAGE_NAME --skip-confirmation --no-propagate-content"

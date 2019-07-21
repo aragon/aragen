@@ -13,6 +13,12 @@ cd aragon-apps;
 INSTALL_FRONTEND=true npm i;
 cd ..;
 
+echo "Fetching planning-suite and installing dependencies (this may take a while 😉)"
+git clone https://github.com/AutarkLabs/planning-suite.git -b dev;
+cd planning-suite;
+npm i;
+cd ..;
+
 echo "Fetching dao-templates and installing dependencies (this may also take a while 😉)"
 git clone https://github.com/aragon/dao-templates.git -b next;
 cd dao-templates;

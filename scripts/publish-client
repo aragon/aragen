@@ -7,3 +7,5 @@ set -e;
 cd repos/aragon;
 
 npm run build:local;
+
+aragon apm publish 1.0.0 --files build --publish-dir $IPFS_CACHE/@aragon/aragon --skip-confirmation --no-propagate-content;
