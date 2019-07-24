@@ -3,9 +3,6 @@
 DIR=$(pwd)
 IPFS_CACHE=$DIR/ipfs-cache
 
-rm -rf $IPFS_CACHE;
-mkdir $IPFS_CACHE;
-
 set -e;
 
 cd repos/planning-suite;

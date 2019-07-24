@@ -9,5 +9,6 @@ cd repos
 
 echo "Linking to local repos"
 ln -s ../../aragon-apps aragon-apps
+ln -s ../../planning-suite planning-suite
 ln -s ../../dao-templates dao-templates
 ln -s ../../aragon aragon
