@@ -1,7 +1,7 @@
 const namehash = require('eth-ens-namehash').hash
 const keccak256 = require('js-sha3').keccak_256
 
-const deployAPM = require('./deploy-apm')
+const deployAPM = require('./apm')
 
 const globalArtifacts = this.artifacts // Not injected unless called directly via truffle
 const globalWeb3 = this.web3 // Not injected unless called directly via truffle

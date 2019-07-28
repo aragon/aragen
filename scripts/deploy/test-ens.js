@@ -1,5 +1,5 @@
 const logDeploy = require('@aragon/os/scripts/helpers/deploy-logger')
-const getAccounts = require('./helpers/get-accounts')
+const getAccounts = require('@aragon/os/scripts/helpers/get-accounts')
 
 const globalArtifacts = this.artifacts // Not injected unless called directly via truffle
 const globalWeb3 = this.web3 // Not injected unless called directly via truffle

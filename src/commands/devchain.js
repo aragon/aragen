@@ -9,7 +9,7 @@ const rimraf = require('rimraf')
 const mkdirp = require('mkdirp')
 const chalk = require('chalk')
 const fs = require('fs')
-const listrOpts = require('../helpers/listr-options')
+const listrOpts = require('@aragon/cli-utils/src/helpers/listr-options')
 const pjson = require('../../package.json')
 
 const { BLOCK_GAS_LIMIT, MNEMONIC } = require('../helpers/ganache-vars')
@@ -85,7 +85,7 @@ exports.task = async function({
               server.listen(port, err => {
                 if (err) return reject(err)
 
-                task.title = `Local chain started at port ${port}`
+                task.title = `Local chain started at port ${chalk.blue(port)}\n`
                 resolve()
               })
             })
@@ -117,34 +117,36 @@ exports.task = async function({
 
 exports.printAccounts = (reporter, privateKeys) => {
   const firstAccountComment =
-    '(this account is used to deploy DAOs, it has more permissions)'
+    '(account used to deploy DAOs, has more permissions)'
 
   const formattedAccounts = privateKeys.map(
     ({ address, key }, i) =>
-      chalk.bold(
-        `Address #${i + 1}:  ${address} ${
-          i === 0 ? firstAccountComment : ''
-        }\nPrivate key: `
-      ) + key
+      `Address #${i + 1}:  ${chalk.green(address)} ${
+        i === 0 ? firstAccountComment : ''
+      }\nPrivate key: ` +
+      chalk.blue(key) +
+      '\n'
   )
 
   reporter.info(`Here are some Ethereum accounts you can use.
-  The first one will be used for all the actions the CLI performs.
+  The first one will be used for all the actions the aragonCLI performs.
   You can use your favorite Ethereum provider or wallet to import their private keys.
   \n${formattedAccounts.join('\n')}`)
 }
 
 exports.printMnemonic = (reporter, mnemonic) => {
   reporter.info(
-    `The accounts were generated from the following mnemonic phrase:\n${mnemonic}\n`
+    `The accounts were generated from the following mnemonic phrase:\n${chalk.blue(
+      mnemonic
+    )}\n`
   )
 }
 
 exports.printResetNotice = (reporter, reset) => {
   if (reset) {
     reporter.warning(`The devchain was reset, some steps need to be done to prevent issues:
-    - Reset the application cache in Aragon Core by going to Settings > Troubleshooting.
-    - If using Metamask: switch to a different network, and then switch back to the 'Private Network' (this will clear the nonce cache and prevent errors when sending transactions)  
+    - Reset the application cache in Aragon Client by going to Settings -> Troubleshooting.
+    - If using Metamask: switch to a different network, and then switch back to the 'Private Network' (this will clear the nonce cache and prevent errors when sending transactions)
   `)
   }
 }
@@ -173,8 +175,10 @@ exports.handler = async ({
   exports.printResetNotice(reporter, reset)
 
   reporter.info(
-    `ENS instance deployed at 0x5f6f7e8cc7346a11ca2def8f827b7a0b612c56a1\n`
+    'ENS instance deployed at',
+    chalk.green('0x5f6f7e8cc7346a11ca2def8f827b7a0b612c56a1'),
+    '\n'
   )
 
-  reporter.info(`Devchain running: ${chalk.bold('http://localhost:' + port)}.`)
+  reporter.info(`Devchain running: ${chalk.blue('http://localhost:' + port)}.`)
 }

@@ -1,9 +1,15 @@
 #!/usr/bin/env node
 require('@babel/polyfill')
-const ConsoleReporter = require('./reporters/ConsoleReporter')
+const ConsoleReporter = require('@aragon/cli-utils/src/reporters/ConsoleReporter')
 
 // Set up commands
-const cmd = require('yargs').commandDir('./commands')
+const cmd = require('yargs')
+  .strict()
+  .parserConfiguration({
+    'parse-numbers': false,
+  })
+  .usage(`Usage: aragen <command> [options]`)
+  .commandDir('./commands')
 
 cmd.alias('h', 'help')
 cmd.alias('v', 'version')
