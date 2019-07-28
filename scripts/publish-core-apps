@@ -1,14 +1,15 @@
 #!/bin/bash
 
 DIR=$(pwd)
-IPFS_CACHE=$DIR/ipfs-cachapp/buil
+IPFS_CACHE=$DIR/ipfs-cache
 
 set -e;
 
 cd repos/aragon-apps;
 
-LERNA_EXEC_APPS="npx lerna exec --scope=@aragon/apps-finance --scope=@aragon/apps-voting --scope=@aragon/apps-token-manager --scope=@aragon/apps-survey --concurrency=1 --stream"
+LERNA_EXEC_APPS="npx lerna exec --scope=@aragon/apps-finance --scope=@aragon/apps-voting --scope=@aragon/apps-token-manager --scope=@aragon/apps-survey --scope=@aragon/future-apps-payroll --concurrency=1 --stream"
 LERNA_EXEC_APPS_WITHOUT_UI="npx lerna exec --scope=@aragon/apps-vault --scope=@aragon/apps-agent --concurrency=1 --stream"
 
+
 $LERNA_EXEC_APPS -- "aragon apm publish 1.0.0 --files app/build --publish-dir $IPFS_CACHE/\$LERNA_PACKAGE_NAME --skip-confirmation --no-propagate-content"
-$LERNA_EXEC_APPS_WITHOUT_UI -- "aragon apm publish 1.0.0 --files manifest.json --publish-dir $IPFS_CACHE/\$LERNA_PACKAGE_NAME --skip-confirmation --no-propagate-content"
+$LERNA_EXEC_APPS_WITHOUT_UI -- "aragon apm publish 1.0.0 --files public --publish-dir $IPFS_CACHE/\$LERNA_PACKAGE_NAME --skip-confirmation --no-propagate-content"

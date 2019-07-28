@@ -10,7 +10,7 @@
     "postinstall": "npm run gen",
     "start": "npm run start-ganache-bg && npm run deploy",
     "start:local": "npm run start-ganache-bg && npm run link-repos && npm run deploy",
-    "deploy": "npm run deploy-base && npm run publish-client && npm run publish-core-apps && npm run publish-open-enterprise && npm run publish-templates",
+    "deploy": "npm run deploy-base && npm run publish-client && npm run publish-core-apps && npm run publish-templates",
     "start-ganache": "scripts/start-ganache",
     "start-ganache-bg": "scripts/start-ganache-bg",
     "gen": "scripts/get-repos",
@@ -41,14 +41,14 @@
   },
   "homepage": "https://github.com/aragon/aragen#readme",
   "dependencies": {
-    "@aragon/cli-utils": "^0.0.2",
+    "@aragon/cli-utils": "^0.0.3",
     "@babel/polyfill": "^7.0.0",
     "chalk": "^2.1.0",
     "ganache-core": "^2.5.7",
     "listr": "^0.14.3",
     "ncp": "^2.0.0",
     "rimraf": "^2.6.2",
-    "web3": "1.0.0-beta.37",
+    "web3": "^1.2.0",
     "yargs": "^13.2.4"
   },
   "devDependencies": {

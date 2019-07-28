@@ -11,4 +11,4 @@ cd repos/aragon;
 
 npm run build:local;
 
-aragon apm publish 1.0.0 --only-content --files build/ --publish-dir $IPFS_CACHE/@aragon/aragon --skip-confirmation --no-propagate-content --no-build;
+aragon apm publish 1.0.0 --only-content --files build --publish-dir $IPFS_CACHE/@aragon/aragon --skip-confirmation --no-propagate-content --no-build;
