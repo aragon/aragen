@@ -11,35 +11,55 @@ const chalk = require('chalk')
 const fs = require('fs')
 const listrOpts = require('@aragon/cli-utils/src/helpers/listr-options')
 const pjson = require('../../package.json')
+const devchainStatus = require('./status')
 
 const { BLOCK_GAS_LIMIT, MNEMONIC } = require('../helpers/ganache-vars')
 
 exports.command = 'devchain'
+
 exports.describe =
   'Open a test chain for development and pass arguments to ganache'
-exports.builder = {
-  port: {
-    description: 'The port to run the local chain on',
-    default: 8545,
-  },
-  reset: {
-    type: 'boolean',
-    default: false,
-    description: 'Reset devchain to snapshot',
-  },
-  accounts: {
-    default: 2,
-    description: 'Number of accounts to print',
-  },
-  verbose: {
-    default: false,
-    type: 'boolean',
-    description: 'Enable verbose devchain output',
-  },
+
+exports.builder = yargs => {
+  return yargs
+    .option('port', {
+      description: 'The port to run the local chain on',
+      default: 8545,
+    })
+    .option('network-id', {
+      description: 'Network id to connect with',
+    })
+    .option('mnemonic', {
+      type: 'string',
+      default: MNEMONIC,
+      description: 'Mnemonic phrase',
+    })
+    .option('gas-limit', {
+      type: 'boolean',
+      default: BLOCK_GAS_LIMIT,
+      description: 'Block gas limit',
+    })
+    .option('reset', {
+      type: 'boolean',
+      default: false,
+      description: 'Reset devchain to snapshot',
+    })
+    .option('accounts', {
+      default: 2,
+      description: 'Number of accounts to print',
+    })
+    .option('verbose', {
+      default: false,
+      type: 'boolean',
+      description: 'Enable verbose devchain output',
+    })
 }
 
 exports.task = async function({
   port = 8545,
+  networkId,
+  mnemonic,
+  gasLimit,
   verbose = false,
   reset = false,
   showAccounts = 2,
@@ -59,6 +79,27 @@ exports.task = async function({
   const tasks = new TaskList(
     [
       {
+        title: 'Check devchain status',
+        task: async ctx => {
+          const task = await devchainStatus.task({
+            port,
+            reset,
+            silent,
+            debug,
+          })
+
+          const { portTaken, processID } = await task.run()
+
+          if (portTaken && !reset) {
+            throw new Error(
+              `Process ${chalk.red(
+                processID
+              )} already running at port ${chalk.blue(port)}`
+            )
+          }
+        },
+      },
+      {
         title: 'Setting up a new chain from latest Aragon snapshot',
         task: async (ctx, task) => {
           await removeDir(snapshotPath)
@@ -72,11 +113,9 @@ exports.task = async function({
         title: 'Starting a local chain from snapshot',
         task: async (ctx, task) => {
           const server = ganache.server({
-            // Start on a different networkID every time to avoid Metamask nonce caching issue:
-            // https://github.com/aragon/aragon-cli/issues/156
-            network_id: parseInt(1e8 * Math.random()),
-            gasLimit: BLOCK_GAS_LIMIT,
-            mnemonic: MNEMONIC,
+            network_id: networkId || parseInt(1e8 * Math.random()),
+            gasLimit,
+            mnemonic,
             db_path: snapshotPath,
             logger: verbose ? { log: reporter.info.bind(reporter) } : undefined,
           })
@@ -144,7 +183,9 @@ exports.printMnemonic = (reporter, mnemonic) => {
 
 exports.printResetNotice = (reporter, reset) => {
   if (reset) {
-    reporter.warning(`The devchain was reset, some steps need to be done to prevent issues:
+    reporter.warning(`${chalk.yellow(
+      'The devchain was reset, some steps need to be done to prevent issues:'
+    )}
     - Reset the application cache in Aragon Client by going to Settings -> Troubleshooting.
     - If using Metamask: switch to a different network, and then switch back to the 'Private Network' (this will clear the nonce cache and prevent errors when sending transactions)
   `)
