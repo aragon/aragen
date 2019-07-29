@@ -35,7 +35,6 @@ exports.builder = yargs => {
       description: 'Mnemonic phrase',
     })
     .option('gas-limit', {
-      type: 'boolean',
       default: BLOCK_GAS_LIMIT,
       description: 'Block gas limit',
     })
@@ -56,13 +55,13 @@ exports.builder = yargs => {
 }
 
 exports.task = async function({
-  port = 8545,
+  port,
   networkId,
   mnemonic,
   gasLimit,
-  verbose = false,
-  reset = false,
-  showAccounts = 2,
+  verbose,
+  reset,
+  showAccounts,
   reporter,
   silent,
   debug,
@@ -195,6 +194,9 @@ exports.printResetNotice = (reporter, reset) => {
 exports.handler = async ({
   reporter,
   port,
+  networkId,
+  mnemonic,
+  gasLimit,
   reset,
   verbose,
   accounts,
@@ -203,6 +205,9 @@ exports.handler = async ({
 }) => {
   const task = await exports.task({
     port,
+    networkId,
+    mnemonic,
+    gasLimit,
     reset,
     verbose,
     reporter,
@@ -210,7 +215,7 @@ exports.handler = async ({
     silent,
     debug,
   })
-  const { privateKeys, mnemonic } = await task.run()
+  const { privateKeys } = await task.run()
   exports.printAccounts(reporter, privateKeys)
   exports.printMnemonic(reporter, mnemonic)
   exports.printResetNotice(reporter, reset)
