@@ -44,6 +44,8 @@
     "@aragon/cli-utils": "^0.0.3",
     "@babel/polyfill": "^7.0.0",
     "chalk": "^2.1.0",
+    "execa": "^2.0.3",
+    "find-process": "^1.4.2",
     "ganache-core": "^2.5.7",
     "listr": "^0.14.3",
     "ncp": "^2.0.0",
