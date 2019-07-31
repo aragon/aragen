@@ -15,7 +15,7 @@ const devchainStatus = require('./status')
 
 const { BLOCK_GAS_LIMIT, MNEMONIC } = require('../helpers/ganache-vars')
 
-exports.command = 'devchain'
+exports.command = 'start'
 
 exports.describe =
   'Open a test chain for development and pass arguments to ganache'

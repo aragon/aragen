@@ -8,7 +8,7 @@ const cmd = require('yargs')
   .parserConfiguration({
     'parse-numbers': false,
   })
-  .usage(`Usage: aragen <command> [options]`)
+  .usage(`Usage: devchain <command> [options]`)
   .commandDir('./commands')
 
 cmd.alias('h', 'help')
