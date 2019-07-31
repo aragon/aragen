@@ -38,7 +38,7 @@ To use directly with ganache-cli:
 
 ```
 npm install @aragon/aragen
-npx aragen devchain
+npx aragen start
 ```
 
 If you wish to access from code, for example to run ganache-core directly:
