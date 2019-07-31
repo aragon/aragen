@@ -3,7 +3,13 @@ require('@babel/polyfill')
 const ConsoleReporter = require('./reporters/ConsoleReporter')
 
 // Set up commands
-const cmd = require('yargs').commandDir('./commands')
+const cmd = require('yargs')
+  .strict()
+  .parserConfiguration({
+    'parse-numbers': false,
+  })
+  .usage(`Usage: devchain <command> [options]`)
+  .commandDir('./commands')
 
 cmd.alias('h', 'help')
 cmd.alias('v', 'version')
