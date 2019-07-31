@@ -29,6 +29,9 @@ exports.builder = yargs => {
     .option('network-id', {
       description: 'Network id to connect with',
     })
+    .option('block-time', {
+      description: 'Specify blockTime in seconds for automatic mining',
+    })
     .option('mnemonic', {
       type: 'string',
       default: MNEMONIC,
@@ -57,6 +60,7 @@ exports.builder = yargs => {
 exports.task = async function({
   port,
   networkId,
+  blockTime,
   mnemonic,
   gasLimit,
   verbose,
@@ -91,7 +95,7 @@ exports.task = async function({
 
           if (portTaken && !reset) {
             throw new Error(
-              `Process ${chalk.red(
+              `Process with ID ${chalk.red(
                 processID
               )} already running at port ${chalk.blue(port)}`
             )
@@ -113,10 +117,12 @@ exports.task = async function({
         task: async (ctx, task) => {
           const server = ganache.server({
             network_id: networkId || parseInt(1e8 * Math.random()),
+            blockTime,
             gasLimit,
             mnemonic,
             db_path: snapshotPath,
             logger: verbose ? { log: reporter.info.bind(reporter) } : undefined,
+            debug,
           })
           const listen = () =>
             new Promise((resolve, reject) => {
@@ -195,6 +201,7 @@ exports.handler = async ({
   reporter,
   port,
   networkId,
+  blockTime,
   mnemonic,
   gasLimit,
   reset,
@@ -206,6 +213,7 @@ exports.handler = async ({
   const task = await exports.task({
     port,
     networkId,
+    blockTime,
     mnemonic,
     gasLimit,
     reset,

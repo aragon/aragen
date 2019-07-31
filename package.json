@@ -1,13 +1,12 @@
 {
   "name": "@aragon/aragen",
-  "version": "5.0.3",
+  "version": "5.0.4",
   "description": "Generate Aragon local dev environment snapshots",
   "main": "index.js",
   "bin": {
     "aragen": "./src/cli.js"
   },
   "scripts": {
-    "prepublishOnly": "npm run gen",
     "start": "npm run start-ganache-bg && npm run deploy",
     "start:local": "npm run start-ganache-bg && npm run link-repos && npm run deploy",
     "deploy": "npm run deploy-base && npm run publish-client && npm run publish-core-apps && npm run publish-templates",
