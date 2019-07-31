@@ -1,20 +1,24 @@
 {
   "name": "@aragon/aragen",
-  "version": "4.2.0",
+  "version": "5.0.4",
   "description": "Generate Aragon local dev environment snapshots",
   "main": "index.js",
   "bin": {
     "aragen": "./src/cli.js"
   },
   "scripts": {
-    "start": "npm run start-ganache-bg && npm run get-repos && npm run gen",
-    "start:local": "npm run start-ganache-bg && npm run link-repos && npm run gen",
-    "gen": "scripts/deploy-base && scripts/publish-apps && scripts/publish-templates",
+    "start": "npm run start-ganache-bg && npm run deploy",
+    "start:local": "npm run start-ganache-bg && npm run link-repos && npm run deploy",
+    "deploy": "npm run deploy-base && npm run publish-client && npm run publish-core-apps && npm run publish-templates",
     "start-ganache": "scripts/start-ganache",
     "start-ganache-bg": "scripts/start-ganache-bg",
-    "get-repos": "scripts/get-repos",
+    "gen": "scripts/get-repos",
     "link-repos": "scripts/link-repos",
-    "deploy-base": "scripts/deploy-base"
+    "deploy-base": "scripts/deploy-base",
+    "publish-client": "scripts/publish-client",
+    "publish-core-apps": "scripts/publish-core-apps",
+    "publish-open-enterprise": "scripts/publish-open-enterprise",
+    "publish-templates": "scripts/publish-templates"
   },
   "files": [
     "index.js",
@@ -36,34 +40,27 @@
   },
   "homepage": "https://github.com/aragon/aragen#readme",
   "dependencies": {
+    "@aragon/cli-utils": "^0.0.6",
     "@babel/polyfill": "^7.0.0",
     "chalk": "^2.1.0",
-    "figures": "^3.0.0",
-    "ganache-core": "2.5.3",
+    "execa": "^2.0.3",
+    "find-process": "^1.4.2",
+    "ganache-core": "^2.5.7",
     "listr": "^0.14.3",
     "ncp": "^2.0.0",
     "rimraf": "^2.6.2",
-    "web3": "1.0.0-beta.35",
-    "yargs": "^12.0.0"
+    "web3": "^1.2.0",
+    "yargs": "^13.2.4"
   },
   "devDependencies": {
-    "@aragon/cli": "^5.0.0",
+    "@aragon/cli": "^6.0.0",
     "@aragon/id": "^2.0.0",
     "@aragon/os": "^4.2.0",
     "eth-ens-namehash": "^2.0.8",
-    "ganache-cli": "~6.2.0",
+    "ganache-cli": "^6.4.2",
     "truffle": "4.1.14"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "greenkeeper": {
-    "ignore": [
-      "ganache-core",
-      "ganache-cli",
-      "truffle",
-      "web3",
-      "yargs"
-    ]
   }
 }

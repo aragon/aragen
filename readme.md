@@ -1,12 +1,14 @@
-# AraGen [![Build Status](https://travis-ci.org/aragon/aragen.svg?branch=master)](https://travis-ci.org/aragon/aragen) [![npm](https://img.shields.io/npm/v/@aragon/aragen.svg?style=for-the-badge)](https://www.npmjs.com/package/@aragon/aragen) [![Greenkeeper badge](https://badges.greenkeeper.io/aragon/aragen.svg)](https://greenkeeper.io/)
+# AraGen [![Build Status](https://travis-ci.org/aragon/aragen.svg?branch=master)](https://travis-ci.org/aragon/aragen) [![npm](https://img.shields.io/npm/v/@aragon/aragen.svg?style=for-the-badge)](https://www.npmjs.com/package/@aragon/aragen)
 
 Generate an Aragon environment
 
 ### Requirements
+
 - `npm`
 - `git`
 
 ### How to
+
 ```
 npm i
 npm start
@@ -14,7 +16,7 @@ npm start
 
 Yes, you are done. Happy hacking 🔥🦅!
 
-If you happen to stop ganache, just: 
+If you happen to stop ganache, just:
 
 ```
 npm run start-ganache
@@ -42,7 +44,10 @@ npx aragen devchain
 If you wish to access from code, for example to run ganache-core directly:
 
 ```js
-const aragonSnapshot = path.resolve(require.resolve('@aragon/aragen'), '../aragon-ganache')
+const aragonSnapshot = path.resolve(
+  require.resolve('@aragon/aragen'),
+  '../aragon-ganache'
+)
 ```
 
 ### CI
