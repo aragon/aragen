@@ -61,7 +61,7 @@ exports.handler = async function({
   reporter.newLine()
 
   if (portTaken && !reset) {
-    reporter.info(`Process running at port: ${chalk.blue(port)}`)
+    reporter.info(`Devchain running at port: ${chalk.blue(port)}`)
     reporter.info(`Process ID: ${chalk.blue(processID)}`)
   } else if (!reset) {
     reporter.info(`Devchain is not running at port: ${chalk.blue(port)}`)
