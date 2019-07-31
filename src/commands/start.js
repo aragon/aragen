@@ -201,10 +201,7 @@ exports.handler = async ({
   reporter,
   port,
   networkId,
-<<<<<<< HEAD
-=======
   blockTime,
->>>>>>> 315a82870b94eff9389ba989983e0a7842f922a2
   mnemonic,
   gasLimit,
   reset,
@@ -216,10 +213,7 @@ exports.handler = async ({
   const task = await exports.task({
     port,
     networkId,
-<<<<<<< HEAD
-=======
     blockTime,
->>>>>>> 315a82870b94eff9389ba989983e0a7842f922a2
     mnemonic,
     gasLimit,
     reset,
