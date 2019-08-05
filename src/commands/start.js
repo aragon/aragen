@@ -58,14 +58,14 @@ exports.builder = yargs => {
 }
 
 exports.task = async function({
-  port,
+  port = 8545,
   networkId,
   blockTime,
-  mnemonic,
-  gasLimit,
-  verbose,
-  reset,
-  showAccounts,
+  mnemonic = MNEMONIC,
+  gasLimit = BLOCK_GAS_LIMIT,
+  verbose = false,
+  reset = false,
+  showAccounts = 2,
   reporter,
   silent,
   debug,
