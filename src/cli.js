@@ -12,7 +12,6 @@ const cmd = require('yargs')
   .commandDir('./commands')
 
 cmd.alias('h', 'help')
-cmd.alias('v', 'version')
 
 // Configure CLI behavior
 cmd.demandCommand(1, 'You need to specify a command')

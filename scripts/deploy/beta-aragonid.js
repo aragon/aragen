@@ -70,4 +70,5 @@ module.exports = async (
 
   log('===========')
   log('Deployed AragonID:', aragonID.address)
+  log('===========')
 }

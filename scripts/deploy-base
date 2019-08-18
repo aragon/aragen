@@ -23,3 +23,6 @@ npx truffle exec --network rpc scripts/deploy/apm-open.js
 
 echo "Deploying aragonID registry to aragonpm.eth"
 npx truffle exec --network rpc scripts/deploy/beta-aragonid.js;
+
+echo "Deploying Minime factory"
+npx truffle exec --network rpc scripts/deploy/minimefactory.js;

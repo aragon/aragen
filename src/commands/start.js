@@ -25,41 +25,55 @@ exports.builder = yargs => {
     .option('port', {
       description: 'The port to run the local chain on',
       default: 8545,
+      alias: 'p',
     })
     .option('network-id', {
       description: 'Network id to connect with',
+      alias: 'i',
     })
     .option('block-time', {
       description: 'Specify blockTime in seconds for automatic mining',
+      alias: 'b',
+    })
+    .option('default-balance-ether', {
+      description: 'The default account balance, specified in ether',
+      default: 100,
+      alias: 'e',
     })
     .option('mnemonic', {
       type: 'string',
       default: MNEMONIC,
       description: 'Mnemonic phrase',
+      alias: 'm',
     })
     .option('gas-limit', {
       default: BLOCK_GAS_LIMIT,
       description: 'Block gas limit',
+      alias: 'l',
     })
     .option('reset', {
       type: 'boolean',
       default: false,
       description: 'Reset devchain to snapshot',
+      alias: 'r',
     })
     .option('accounts', {
       default: 2,
       description: 'Number of accounts to print',
+      alias: 'a',
     })
     .option('verbose', {
       default: false,
       type: 'boolean',
       description: 'Enable verbose devchain output',
+      alias: 'v',
     })
 }
 
 exports.task = async function({
   port = 8545,
   networkId,
+  defaultBalanceEther = 100,
   blockTime,
   mnemonic = MNEMONIC,
   gasLimit = BLOCK_GAS_LIMIT,
@@ -115,8 +129,10 @@ exports.task = async function({
       {
         title: 'Starting a local chain from snapshot',
         task: async (ctx, task) => {
+          ctx.id = networkId || parseInt(1e8 * Math.random())
           const server = ganache.server({
-            network_id: networkId || parseInt(1e8 * Math.random()),
+            network_id: ctx.networkId,
+            default_balance_ether: defaultBalanceEther,
             blockTime,
             gasLimit,
             mnemonic,
@@ -201,6 +217,7 @@ exports.handler = async ({
   reporter,
   port,
   networkId,
+  defaultBalanceEther,
   blockTime,
   mnemonic,
   gasLimit,
@@ -213,6 +230,7 @@ exports.handler = async ({
   const task = await exports.task({
     port,
     networkId,
+    defaultBalanceEther,
     blockTime,
     mnemonic,
     gasLimit,
@@ -223,16 +241,20 @@ exports.handler = async ({
     silent,
     debug,
   })
-  const { privateKeys } = await task.run()
+  const { privateKeys, id } = await task.run()
   exports.printAccounts(reporter, privateKeys)
   exports.printMnemonic(reporter, mnemonic)
   exports.printResetNotice(reporter, reset)
 
   reporter.info(
-    'ENS instance deployed at',
+    'ENS instance deployed at:',
     chalk.green('0x5f6f7e8cc7346a11ca2def8f827b7a0b612c56a1'),
     '\n'
   )
 
-  reporter.info(`Devchain running: ${chalk.blue('http://localhost:' + port)}.`)
+  reporter.info(`Network Id: ${chalk.blue(id)}`, '\n')
+
+  reporter.info(
+    `Devchain running at: ${chalk.blue('http://localhost:' + port)}.`
+  )
 }
