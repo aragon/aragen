@@ -13,6 +13,8 @@ import "@aragon/os/contracts/lib/ens/AbstractENS.sol";
 
 import "@aragon/id/contracts/FIFSResolvingRegistrar.sol";
 
+import "@aragon/apps-shared-minime/contracts/MiniMeToken.sol";
+
 
 // You might think this file is a bit odd, but let me explain.
 // We only use some contracts for deploy, which means Truffle
