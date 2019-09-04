@@ -130,8 +130,9 @@ exports.task = async function({
         title: 'Starting a local chain from snapshot',
         task: async (ctx, task) => {
           ctx.id = networkId || parseInt(1e8 * Math.random())
-          const server = ganache.server({
-            network_id: ctx.networkId,
+
+          const options = {
+            network_id: ctx.id,
             default_balance_ether: defaultBalanceEther,
             blockTime,
             gasLimit,
@@ -139,7 +140,10 @@ exports.task = async function({
             db_path: snapshotPath,
             logger: verbose ? { log: reporter.info.bind(reporter) } : undefined,
             debug,
-          })
+          }
+
+          const server = ganache.server(options)
+
           const listen = () =>
             new Promise((resolve, reject) => {
               server.listen(port, err => {

@@ -18,8 +18,8 @@ else
 	exit 1;
 fi
 
-echo "Deploying APM registry to aragonpm.eth and open.aragonpm.eth"
-npx truffle exec --network rpc scripts/deploy/apm-open.js
+echo "Deploying APM registry to aragonpm.eth and open.aragonpm.eth and hatch.aragonpm.eth"
+npx truffle exec --network rpc scripts/deploy/apm-registries.js
 
 echo "Deploying aragonID registry to aragonpm.eth"
 npx truffle exec --network rpc scripts/deploy/beta-aragonid.js;
