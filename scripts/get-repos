@@ -19,6 +19,12 @@ cd planning-suite;
 npm i;
 cd ..;
 
+echo "Fetching fundraising and installing dependencies (this may take a while 😉)"
+git clone https://github.com/AragonBlack/fundraising.git -b next;
+cd fundraising;
+npm i;
+cd ..;
+
 echo "Fetching dao-templates and installing dependencies (this may also take a while 😉)"
 git clone https://github.com/aragon/dao-templates.git -b master;
 cd dao-templates;

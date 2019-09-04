@@ -27,15 +27,17 @@ module.exports = async (
     }
   };
 
-  const APMRegistry = artifacts.require("APMRegistry");
+  // const APMRegistry = artifacts.require("APMRegistry");
   const ENSSubdomainRegistrar = artifacts.require("ENSSubdomainRegistrar");
   const Kernel = artifacts.require("Kernel");
   const ACL = artifacts.require("ACL");
 
   const tldName = "aragonpm.eth";
-  const labelName = "open";
   const tldHash = namehash(tldName);
-  const labelHash = "0x" + keccak256(labelName);
+  const openLabelName = "open";
+  const hatchLabelName = "hatch";
+  const openLabelHash = "0x" + keccak256(openLabelName);
+  const hatchLabelHash = "0x" + keccak256(hatchLabelName);
 
   // deploy `aragonpm.eth`
   const { apmFactory, ens, apm } = await deployAPM(null, {
@@ -67,24 +69,50 @@ module.exports = async (
   log("=========");
 
   log(`TLD: ${tldName} (${tldHash})`);
-  log(`Label: ${labelName} (${labelHash})`);
+  log(`Open Label: ${openLabelName} (${openLabelHash})`);
+  log(`Hatch Label: ${hatchLabelName} (${hatchLabelHash})`);
   log("=========");
 
-  log(`Assigning ENS name (${labelName}.${tldName}) to factory...`);
+  log(
+    `Assigning ENS name (${openLabelName}.${tldName}) and (${hatchLabelName}.${tldName}) to factory...`
+  );
   try {
-    await apmENSSubdomainRegistrar.createName(labelHash, apmFactory.address, {
-      from: owner
-    });
+    await apmENSSubdomainRegistrar.createName(
+      openLabelHash,
+      apmFactory.address,
+      {
+        from: owner
+      }
+    );
   } catch (err) {
     console.error(
-      `Error: could not set the owner of '${labelName}.${tldName}' on the given ENS instance`,
+      `Error: could not set the owner of '${openLabelName}.${tldName}' on the given ENS instance`,
       `(${ensAddress}). Make sure you have ownership rights over the subdomain.`
     );
     throw err;
   }
 
+  try {
+    await apmENSSubdomainRegistrar.createName(
+      hatchLabelHash,
+      apmFactory.address,
+      {
+        from: owner
+      }
+    );
+  } catch (err) {
+    console.error(
+      `Error: could not set the owner of '${hatchLabelName}.${tldName}' on the given ENS instance`,
+      `(${ensAddress}). Make sure you have ownership rights over the subdomain.`
+    );
+    throw err;
+  }
+  log("=========");
+
   log("Deploying Open APM...");
-  const receipt = await apmFactory.newAPM(tldHash, labelHash, owner);
+  let receipt = await apmFactory.newAPM(tldHash, openLabelHash, owner);
+
+  log("=========");
 
   log("=========");
   const openAPMAddr = receipt.logs.filter(l => l.event == "DeployAPM")[0].args
@@ -94,14 +122,25 @@ module.exports = async (
   log("Transaction hash:", receipt.tx);
   log("=========");
 
+  log("=========");
+  log("Deploying Hatch APM...");
+  receipt = await apmFactory.newAPM(tldHash, hatchLabelHash, owner);
+
+  log("=========");
+  const hatchAPMAddr = receipt.logs.filter(l => l.event == "DeployAPM")[0].args
+    .apm;
+  log("# Hatch APM:");
+  log("Address:", hatchAPMAddr);
+  log("Transaction hash:", receipt.tx);
+  log("=========");
+
   if (typeof truffleExecCallback === "function") {
     // Called directly via `truffle exec`
     truffleExecCallback();
   } else {
     return {
       apmFactory,
-      ens,
-      apm: APMRegistry.at(openAPMAddr)
+      ens
     };
   }
 };

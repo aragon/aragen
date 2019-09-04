@@ -1,74 +1,74 @@
-const TaskList = require('listr')
-const ncp = require('ncp')
-const ganache = require('ganache-core')
-const Web3 = require('web3')
-const { promisify } = require('util')
-const os = require('os')
-const path = require('path')
-const rimraf = require('rimraf')
-const mkdirp = require('mkdirp')
-const chalk = require('chalk')
-const fs = require('fs')
-const listrOpts = require('@aragon/cli-utils/src/helpers/listr-options')
-const pjson = require('../../package.json')
-const devchainStatus = require('./status')
+const TaskList = require("listr");
+const ncp = require("ncp");
+const ganache = require("ganache-core");
+const Web3 = require("web3");
+const { promisify } = require("util");
+const os = require("os");
+const path = require("path");
+const rimraf = require("rimraf");
+const mkdirp = require("mkdirp");
+const chalk = require("chalk");
+const fs = require("fs");
+const listrOpts = require("@aragon/cli-utils/src/helpers/listr-options");
+const pjson = require("../../package.json");
+const devchainStatus = require("./status");
 
-const { BLOCK_GAS_LIMIT, MNEMONIC } = require('../helpers/ganache-vars')
+const { BLOCK_GAS_LIMIT, MNEMONIC } = require("../helpers/ganache-vars");
 
-exports.command = 'start'
+exports.command = "start";
 
 exports.describe =
-  'Open a test chain for development and pass arguments to ganache'
+  "Open a test chain for development and pass arguments to ganache";
 
 exports.builder = yargs => {
   return yargs
-    .option('port', {
-      description: 'The port to run the local chain on',
+    .option("port", {
+      description: "The port to run the local chain on",
       default: 8545,
-      alias: 'p',
+      alias: "p"
     })
-    .option('network-id', {
-      description: 'Network id to connect with',
-      alias: 'i',
+    .option("network-id", {
+      description: "Network id to connect with",
+      alias: "i"
     })
-    .option('block-time', {
-      description: 'Specify blockTime in seconds for automatic mining',
-      alias: 'b',
+    .option("block-time", {
+      description: "Specify blockTime in seconds for automatic mining",
+      alias: "b"
     })
-    .option('default-balance-ether', {
-      description: 'The default account balance, specified in ether',
+    .option("default-balance-ether", {
+      description: "The default account balance, specified in ether",
       default: 100,
-      alias: 'e',
+      alias: "e"
     })
-    .option('mnemonic', {
-      type: 'string',
+    .option("mnemonic", {
+      type: "string",
       default: MNEMONIC,
-      description: 'Mnemonic phrase',
-      alias: 'm',
+      description: "Mnemonic phrase",
+      alias: "m"
     })
-    .option('gas-limit', {
+    .option("gas-limit", {
       default: BLOCK_GAS_LIMIT,
-      description: 'Block gas limit',
-      alias: 'l',
+      description: "Block gas limit",
+      alias: "l"
     })
-    .option('reset', {
-      type: 'boolean',
+    .option("reset", {
+      type: "boolean",
       default: false,
-      description: 'Reset devchain to snapshot',
-      alias: 'r',
+      description: "Reset devchain to snapshot",
+      alias: "r"
     })
-    .option('accounts', {
+    .option("accounts", {
       default: 2,
-      description: 'Number of accounts to print',
-      alias: 'a',
+      description: "Number of accounts to print",
+      alias: "a"
     })
-    .option('verbose', {
+    .option("verbose", {
       default: false,
-      type: 'boolean',
-      description: 'Enable verbose devchain output',
-      alias: 'v',
-    })
-}
+      type: "boolean",
+      description: "Enable verbose devchain output",
+      alias: "v"
+    });
+};
 
 exports.task = async function({
   port = 8545,
@@ -82,136 +82,142 @@ exports.task = async function({
   showAccounts = 2,
   reporter,
   silent,
-  debug,
+  debug
 }) {
-  const removeDir = promisify(rimraf)
-  const mkDir = promisify(mkdirp)
-  const recursiveCopy = promisify(ncp)
+  const removeDir = promisify(rimraf);
+  const mkDir = promisify(mkdirp);
+  const recursiveCopy = promisify(ncp);
 
   const snapshotPath = path.join(
     os.homedir(),
     `.aragon/aragen-db-${pjson.version}`
-  )
+  );
 
   const tasks = new TaskList(
     [
       {
-        title: 'Check devchain status',
+        title: "Check devchain status",
         task: async ctx => {
           const task = await devchainStatus.task({
             port,
             reset,
             silent,
-            debug,
-          })
+            debug
+          });
 
-          const { portTaken, processID } = await task.run()
+          const { portTaken, processID } = await task.run();
 
           if (portTaken && !reset) {
             throw new Error(
               `Process with ID ${chalk.red(
                 processID
               )} already running at port ${chalk.blue(port)}`
-            )
+            );
           }
-        },
+        }
       },
       {
-        title: 'Setting up a new chain from latest Aragon snapshot',
+        title: "Setting up a new chain from latest Aragon snapshot",
         task: async (ctx, task) => {
-          await removeDir(snapshotPath)
-          await mkDir(path.resolve(snapshotPath, '..'))
-          const snapshot = path.join(__dirname, '../../aragon-ganache')
-          await recursiveCopy(snapshot, snapshotPath)
+          await removeDir(snapshotPath);
+          await mkDir(path.resolve(snapshotPath, ".."));
+          const snapshot = path.join(__dirname, "../../aragon-ganache");
+          await recursiveCopy(snapshot, snapshotPath);
         },
-        enabled: () => !fs.existsSync(snapshotPath) || reset,
+        enabled: () => !fs.existsSync(snapshotPath) || reset
       },
       {
-        title: 'Starting a local chain from snapshot',
+        title: "Starting a local chain from snapshot",
         task: async (ctx, task) => {
-          ctx.id = networkId || parseInt(1e8 * Math.random())
-          const server = ganache.server({
-            network_id: ctx.networkId,
+          ctx.id = networkId || parseInt(1e8 * Math.random());
+
+          const options = {
+            network_id: ctx.id,
             default_balance_ether: defaultBalanceEther,
             blockTime,
             gasLimit,
             mnemonic,
             db_path: snapshotPath,
             logger: verbose ? { log: reporter.info.bind(reporter) } : undefined,
-            debug,
-          })
+            debug
+          };
+
+          const server = ganache.server(options);
+
           const listen = () =>
             new Promise((resolve, reject) => {
               server.listen(port, err => {
-                if (err) return reject(err)
+                if (err) return reject(err);
 
-                task.title = `Local chain started at port ${chalk.blue(port)}\n`
-                resolve()
-              })
-            })
-          await listen()
+                task.title = `Local chain started at port ${chalk.blue(
+                  port
+                )}\n`;
+                resolve();
+              });
+            });
+          await listen();
 
           ctx.web3 = new Web3(
             new Web3.providers.WebsocketProvider(`ws://localhost:${port}`)
-          )
-          const accounts = await ctx.web3.eth.getAccounts()
+          );
+          const accounts = await ctx.web3.eth.getAccounts();
 
-          ctx.accounts = accounts.slice(0, parseInt(showAccounts))
-          ctx.mnemonic = MNEMONIC
+          ctx.accounts = accounts.slice(0, parseInt(showAccounts));
+          ctx.mnemonic = MNEMONIC;
 
-          const ganacheAccounts = server.provider.manager.state.accounts
+          const ganacheAccounts = server.provider.manager.state.accounts;
           ctx.privateKeys = ctx.accounts.map(address => ({
             key: ganacheAccounts[address.toLowerCase()].secretKey.toString(
-              'hex'
+              "hex"
             ),
-            address,
-          }))
-        },
-      },
+            address
+          }));
+        }
+      }
     ],
     listrOpts(silent, debug)
-  )
+  );
 
-  return tasks
-}
+  return tasks;
+};
 
 exports.printAccounts = (reporter, privateKeys) => {
   const firstAccountComment =
-    '(account used to deploy DAOs, has more permissions)'
+    "(account used to deploy DAOs, has more permissions)";
 
   const formattedAccounts = privateKeys.map(
     ({ address, key }, i) =>
       `Address #${i + 1}:  ${chalk.green(address)} ${
-        i === 0 ? firstAccountComment : ''
+        i === 0 ? firstAccountComment : ""
       }\nPrivate key: ` +
       chalk.blue(key) +
-      '\n'
-  )
+      "\n"
+  );
 
   reporter.info(`Here are some Ethereum accounts you can use.
   The first one will be used for all the actions the aragonCLI performs.
   You can use your favorite Ethereum provider or wallet to import their private keys.
-  \n${formattedAccounts.join('\n')}`)
-}
+  \n${formattedAccounts.join("\n")}`);
+};
 
 exports.printMnemonic = (reporter, mnemonic) => {
   reporter.info(
     `The accounts were generated from the following mnemonic phrase:\n${chalk.blue(
       mnemonic
     )}\n`
-  )
-}
+  );
+};
 
 exports.printResetNotice = (reporter, reset) => {
   if (reset) {
     reporter.warning(`${chalk.yellow(
-      'The devchain was reset, some steps need to be done to prevent issues:'
+      "The devchain was reset, some steps need to be done to prevent issues:"
     )}
     - Reset the application cache in Aragon Client by going to Settings -> Troubleshooting.
     - If using Metamask: switch to a different network, and then switch back to the 'Private Network' (this will clear the nonce cache and prevent errors when sending transactions)
-  `)
+  `);
   }
-}
+};
 
 exports.handler = async ({
   reporter,
@@ -225,7 +231,7 @@ exports.handler = async ({
   verbose,
   accounts,
   silent,
-  debug,
+  debug
 }) => {
   const task = await exports.task({
     port,
@@ -239,22 +245,22 @@ exports.handler = async ({
     reporter,
     showAccounts: accounts,
     silent,
-    debug,
-  })
-  const { privateKeys, id } = await task.run()
-  exports.printAccounts(reporter, privateKeys)
-  exports.printMnemonic(reporter, mnemonic)
-  exports.printResetNotice(reporter, reset)
+    debug
+  });
+  const { privateKeys, id } = await task.run();
+  exports.printAccounts(reporter, privateKeys);
+  exports.printMnemonic(reporter, mnemonic);
+  exports.printResetNotice(reporter, reset);
 
   reporter.info(
-    'ENS instance deployed at:',
-    chalk.green('0x5f6f7e8cc7346a11ca2def8f827b7a0b612c56a1'),
-    '\n'
-  )
+    "ENS instance deployed at:",
+    chalk.green("0x5f6f7e8cc7346a11ca2def8f827b7a0b612c56a1"),
+    "\n"
+  );
 
-  reporter.info(`Network Id: ${chalk.blue(id)}`, '\n')
+  reporter.info(`Network Id: ${chalk.blue(id)}`, "\n");
 
   reporter.info(
-    `Devchain running at: ${chalk.blue('http://localhost:' + port)}.`
-  )
-}
+    `Devchain running at: ${chalk.blue("http://localhost:" + port)}.`
+  );
+};
