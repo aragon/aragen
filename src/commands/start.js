@@ -35,20 +35,9 @@ exports.builder = yargs => {
       description: 'Specify blockTime in seconds for automatic mining',
       alias: 'b',
     })
-    .option('default-balance-ether', {
-      description: 'The default account balance, specified in ether',
-      default: 100,
-      alias: 'e',
-    })
-    .option('mnemonic', {
-      type: 'string',
-      default: MNEMONIC,
-      description: 'Mnemonic phrase',
-      alias: 'm',
-    })
     .option('gas-limit', {
       default: BLOCK_GAS_LIMIT,
-      description: 'Block gas limit',
+      description: 'Block gas limit. Must be specified as a hex string',
       alias: 'l',
     })
     .option('reset', {
@@ -66,16 +55,14 @@ exports.builder = yargs => {
       default: false,
       type: 'boolean',
       description: 'Enable verbose devchain output',
-      alias: 'v',
+      alias: 'd',
     })
 }
 
 exports.task = async function({
   port = 8545,
   networkId,
-  defaultBalanceEther = 100,
   blockTime,
-  mnemonic = MNEMONIC,
   gasLimit = BLOCK_GAS_LIMIT,
   verbose = false,
   reset = false,
@@ -129,14 +116,13 @@ exports.task = async function({
       {
         title: 'Starting a local chain from snapshot',
         task: async (ctx, task) => {
-          ctx.id = networkId || parseInt(1e8 * Math.random())
+          ctx.id = parseInt(networkId) || parseInt(1e8 * Math.random())
 
           const options = {
             network_id: ctx.id,
-            default_balance_ether: defaultBalanceEther,
             blockTime,
             gasLimit,
-            mnemonic,
+            mnemonic: MNEMONIC,
             db_path: snapshotPath,
             logger: verbose ? { log: reporter.info.bind(reporter) } : undefined,
             debug,
@@ -221,9 +207,7 @@ exports.handler = async ({
   reporter,
   port,
   networkId,
-  defaultBalanceEther,
   blockTime,
-  mnemonic,
   gasLimit,
   reset,
   verbose,
@@ -234,9 +218,7 @@ exports.handler = async ({
   const task = await exports.task({
     port,
     networkId,
-    defaultBalanceEther,
     blockTime,
-    mnemonic,
     gasLimit,
     reset,
     verbose,
@@ -245,7 +227,7 @@ exports.handler = async ({
     silent,
     debug,
   })
-  const { privateKeys, id } = await task.run()
+  const { privateKeys, id, mnemonic } = await task.run()
   exports.printAccounts(reporter, privateKeys)
   exports.printMnemonic(reporter, mnemonic)
   exports.printResetNotice(reporter, reset)
