@@ -7,4 +7,4 @@ mnemonic=$(node -p "require(require('path').join(\"${BASEPATH}\", 'src/helpers/g
 rm -rf aragon-ganache
 mkdir aragon-ganache
 set -e;
-npx ganache-cli -m "${mnemonic}" -i 15 -l 100000000 --db aragon-ganache
+npx ganache-cli -m "${mnemonic}" -i 15 -l 100000000 --db aragon-ganache --e 10000

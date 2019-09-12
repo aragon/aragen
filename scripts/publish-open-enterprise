@@ -5,7 +5,7 @@ IPFS_CACHE=$DIR/ipfs-cache
 
 set -e;
 
-cd repos/planning-suite;
+cd repos/open-enterprise;
 
 LERNA_EXEC_APPS="npx lerna exec --scope=@tps/apps-address-book --scope=@tps/apps-allocations --scope=@tps/apps-dot-voting --scope=@tps/apps-projects --scope=@tps/apps-rewards --concurrency=1 --stream"
 

@@ -14,8 +14,8 @@ INSTALL_FRONTEND=true npm i;
 cd ..;
 
 echo "Fetching planning-suite and installing dependencies (this may take a while 😉)"
-git clone https://github.com/AutarkLabs/planning-suite.git -b dev;
-cd planning-suite;
+git clone https://github.com/AutarkLabs/open-enterprise.git -b dev;
+cd open-enterprise;
 npm i;
 cd ..;
 

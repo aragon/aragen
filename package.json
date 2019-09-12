@@ -1,6 +1,6 @@
 {
   "name": "@aragon/aragen",
-  "version": "5.2.0",
+  "version": "5.3.0",
   "description": "Generate Aragon local dev environment snapshots",
   "main": "index.js",
   "bin": {
@@ -46,7 +46,7 @@
     "chalk": "^2.1.0",
     "execa": "^2.0.3",
     "find-process": "^1.4.2",
-    "ganache-core": "2.5.3",
+    "ganache-core": "^2.8.0",
     "listr": "^0.14.3",
     "ncp": "^2.0.0",
     "rimraf": "^2.6.2",
@@ -59,7 +59,7 @@
     "@aragon/os": "^4.2.0",
     "@aragon/apps-shared-minime": "^1.0.0",
     "eth-ens-namehash": "^2.0.8",
-    "ganache-cli": "~6.2.0",
+    "ganache-cli": "^6.7.0",
     "truffle": "4.1.14"
   },
   "publishConfig": {
