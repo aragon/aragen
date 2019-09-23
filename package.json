@@ -1,6 +1,6 @@
 {
   "name": "@aragon/aragen",
-  "version": "5.3.2",
+  "version": "5.3.3",
   "description": "Generate Aragon local dev environment snapshots",
   "main": "index.js",
   "bin": {
