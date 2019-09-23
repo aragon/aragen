@@ -8,4 +8,4 @@ cd repos/dao-templates;
 
 LERNA_EXEC="npx lerna exec --scope=@aragon/templates-bare --scope=@aragon/templates-company --scope=@aragon/templates-company-board --scope=@aragon/templates-membership --scope=@aragon/templates-reputation --scope=@aragon/templates-trust --concurrency=1 --stream"
 
-$LERNA_EXEC -- "npm run publish:aragen -- --publish-dir $IPFS_CACHE/\$LERNA_PACKAGE_NAME --skip-confirmation --no-propagate-content"
+$LERNA_EXEC -- "npm run publish:aragen -- --publish-dir $IPFS_CACHE/\$LERNA_PACKAGE_NAME --skip-confirmation --no-propagate-content --files manifest.json"
