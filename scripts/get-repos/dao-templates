@@ -7,5 +7,5 @@ echo "Fetching dao-templates and installing dependencies (this may also take a w
 cd repos;
 git clone https://github.com/aragon/dao-templates.git -b master;
 cd dao-templates;
-npm i;
+npm run bootstrap -- --no-ci;
 cd ..;

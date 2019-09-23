@@ -7,5 +7,5 @@ echo "Fetching fundraising and installing dependencies (this may take a while ðŸ
 cd repos;
 git clone https://github.com/AragonBlack/fundraising.git -b next~3;
 cd fundraising;
-npm i;
+npm run bootstrap -- --no-ci;
 cd ..;
