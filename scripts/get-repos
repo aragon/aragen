@@ -20,7 +20,7 @@ npm i;
 cd ..;
 
 echo "Fetching fundraising and installing dependencies (this may take a while 😉)"
-git clone https://github.com/AragonBlack/fundraising.git -b next;
+git clone https://github.com/AragonBlack/fundraising.git -b next~3;
 cd fundraising;
 npm i;
 cd ..;
