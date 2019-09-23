@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e;
+
+echo "Fetching fundraising and installing dependencies (this may take a while 😉)"
+git clone https://github.com/AragonBlack/fundraising.git -b next~3;
+cd fundraising;
+npm i;
+cd ..;

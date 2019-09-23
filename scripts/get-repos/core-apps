@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e;
+
+echo "Fetching aragon-apps and installing dependencies (this may take a while 😉)"
+
+git clone https://github.com/aragon/aragon-apps.git -b master;
+cd aragon-apps;
+INSTALL_FRONTEND=true npm i;
+cd ..;
