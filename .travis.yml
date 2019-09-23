@@ -5,6 +5,11 @@ node_js:
   - '8'
 install:
   - travis_wait 60 npm install
+  - travis_wait 60 npm run get-client
+  - travis_wait 60 npm run get-core-apps
+  - travis_wait 60 npm run get-dao-templates
+  - travis_wait 60 npm run get-fundraising
+  - travis_wait 60 npm run get-open-enterprise
   - npm run start
 before_script:
   - npm prune

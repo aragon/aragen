@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e;
+
+echo "Fetching planning-suite and installing dependencies (this may take a while 😉)"
+git clone https://github.com/AutarkLabs/open-enterprise.git -b dev;
+cd open-enterprise;
+npm i;
+cd ..;
