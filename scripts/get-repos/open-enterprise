@@ -5,7 +5,7 @@ set -e;
 echo "Fetching planning-suite and installing dependencies (this may take a while 😉)"
 
 cd repos;
-git clone https://github.com/AutarkLabs/open-enterprise.git -b dev;
+git clone https://github.com/AutarkLabs/open-enterprise.git -b next;
 cd open-enterprise;
 npm run bootstrap -- --no-ci;
 cd ..;
