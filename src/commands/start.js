@@ -1,7 +1,7 @@
 const TaskList = require('listr')
 const ncp = require('ncp')
-const ganache = require('ganache-core')
-const Web3 = require('web3')
+const ganache = require('../build/ganache-core.node.cli.js')
+const ethers = require('ethers')
 const { promisify } = require('util')
 const os = require('os')
 const path = require('path')
@@ -141,21 +141,14 @@ exports.task = async function({
             })
           await listen()
 
-          ctx.web3 = new Web3(
-            new Web3.providers.WebsocketProvider(`ws://localhost:${port}`)
-          )
-          const accounts = await ctx.web3.eth.getAccounts()
-
-          ctx.accounts = accounts.slice(0, parseInt(showAccounts))
           ctx.mnemonic = MNEMONIC
 
-          const ganacheAccounts = server.provider.manager.state.accounts
-          ctx.privateKeys = ctx.accounts.map(address => ({
-            key: ganacheAccounts[address.toLowerCase()].secretKey.toString(
-              'hex'
-            ),
-            address,
-          }))
+          ctx.wallets = []
+
+          for (i = 1; i <= showAccounts; i++) {
+            let path = `m/44'/60'/0'/0/${i - 1}`
+            ctx.wallets.push(ethers.Wallet.fromMnemonic(MNEMONIC, path))
+          }
         },
       },
     ],
@@ -165,16 +158,16 @@ exports.task = async function({
   return tasks
 }
 
-exports.printAccounts = (reporter, privateKeys) => {
+exports.printAccounts = (reporter, wallets) => {
   const firstAccountComment =
     '(account used to deploy DAOs, has more permissions)'
 
-  const formattedAccounts = privateKeys.map(
-    ({ address, key }, i) =>
+  const formattedAccounts = wallets.map(
+    ({ address, privateKey }, i) =>
       `Address #${i + 1}:  ${chalk.green(address)} ${
         i === 0 ? firstAccountComment : ''
       }\nPrivate key: ` +
-      chalk.blue(key) +
+      chalk.blue(privateKey) +
       '\n'
   )
 
@@ -227,8 +220,8 @@ exports.handler = async ({
     silent,
     debug,
   })
-  const { privateKeys, id, mnemonic } = await task.run()
-  exports.printAccounts(reporter, privateKeys)
+  const { wallets, id, mnemonic } = await task.run()
+  exports.printAccounts(reporter, wallets)
   exports.printMnemonic(reporter, mnemonic)
   exports.printResetNotice(reporter, reset)
 
