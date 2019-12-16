@@ -11,6 +11,7 @@ Generate an Aragon environment
 
 ```
 npm i
+npm run gen
 npm start
 ```
 
@@ -29,17 +30,14 @@ The Aragen package published to NPM contains a ganache snapshot that can be used
 By default it has set up:
 
 - ENS: `0x5f6f7e8cc7346a11ca2def8f827b7a0b612c56a1`
+- DAO_FACTORY: `0x5d94e3e7aec542ab0f9129b9a7badeb5b3ca0f77`
+- MINIME_FACTORY: `0xd526b7aba39cccf76422835e7fd5327b98ad73c9`
+- FIFResolvingRegistrar: `0xf1f8aac64036cdd399886b1c157b7e3b361093f3`
+
 - APM: `ens.addr('aragonpm.eth')`
 - AragonID: `ens.owner('aragonid.eth')`
 - Aragon apps: As APM repos, e.g. `apm.getLatest('voting.aragonpm.eth')`
-- Beta templates: As APM repos, e.g. `apm.getLatest('democracy-template.aragonpm.eth')`
-
-To use directly with ganache-cli:
-
-```
-npm install @aragon/aragen
-npx aragen start
-```
+- Templates: As APM repos, e.g. `apm.getLatest('democracy-template.aragonpm.eth')`
 
 If you wish to access from code, for example to run ganache-core directly:
 
