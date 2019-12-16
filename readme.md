@@ -11,7 +11,6 @@ Generate an Aragon environment
 
 ```
 npm i
-npm run gen
 npm start
 ```
 
