@@ -1,4 +1,8 @@
 #!/usr/bin/env node
+
+// make sourcemaps work!
+require('source-map-support').install()
+
 require('@babel/polyfill')
 const ConsoleReporter = require('@aragon/cli-utils/src/reporters/ConsoleReporter')
 
