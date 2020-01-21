@@ -2,7 +2,7 @@
 
 cd $(dirname $0)/..
 BASEPATH=$(pwd)
-mnemonic=$(node -p "require(require('path').join(\"${BASEPATH}\", 'scripts/helpers/ganache-vars')).MNEMONIC")
+mnemonic=$(node -p "require(require('path').join(\"${BASEPATH}\", 'src/helpers/ganache-vars')).MNEMONIC")
 
 rm -rf aragon-ganache
 mkdir aragon-ganache
