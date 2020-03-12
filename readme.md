@@ -62,3 +62,7 @@ If you need to trigger the CI so a new snapshot is generated and publish to NPM,
 ```
 npm version [major, minor, patch]
 ```
+
+## Getting help
+
+If you need help, please reach out to Aragon core contributors and community members on [Spectrum](https://spectrum.chat/aragon/app-development). We'd love to hear from you and know what you're working on!
