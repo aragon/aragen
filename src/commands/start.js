@@ -1,6 +1,6 @@
 const TaskList = require('listr')
 const ncp = require('ncp')
-const ganache = require('../build/ganache-core.node.cli.js')
+const ganache = require('ganache-core')
 const ethers = require('ethers')
 const { promisify } = require('util')
 const os = require('os')
