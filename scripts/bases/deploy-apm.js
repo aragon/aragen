@@ -1,10 +1,10 @@
+const logDeploy = require('@aragon/os/scripts/helpers/deploy-logger')
+const getAccounts = require('@aragon/os/scripts/helpers/get-accounts')
 const namehash = require('eth-ens-namehash').hash
 const keccak256 = require('js-sha3').keccak_256
 
-const deployENS = require('./test-ens')
-const deployDaoFactory = require('./daofactory')
-const logDeploy = require('@aragon/os/scripts/helpers/deploy-logger')
-const getAccounts = require('@aragon/os/scripts/helpers/get-accounts')
+const deployENS = require('./deploy-test-ens')
+const deployDaoFactory = require('./deploy-daofactory')
 
 const globalArtifacts = this.artifacts // Not injected unless called directly via truffle
 const globalWeb3 = this.web3 // Not injected unless called directly via truffle
@@ -95,11 +95,13 @@ module.exports = async (
     )
   } else {
     log('Deploying DAOFactory with EVMScripts...')
-    daoFactory = (await deployDaoFactory(null, {
-      artifacts,
-      withEvmScriptRegistryFactory: true,
-      verbose: false,
-    })).daoFactory
+    daoFactory = (
+      await deployDaoFactory(null, {
+        artifacts,
+        withEvmScriptRegistryFactory: true,
+        verbose: false,
+      })
+    ).daoFactory
   }
 
   log('Deploying APMRegistryFactory...')
@@ -115,7 +117,7 @@ module.exports = async (
 
   log(`Assigning ENS name (${labelName}.${tldName}) to factory...`)
 
-  if ((await ens.owner(apmNode)) === owner) {
+  if ((await ens.owner(apmNode)) === accounts[0]) {
     log('Transferring name ownership from deployer to APMRegistryFactory')
     await ens.setOwner(apmNode, apmFactory.address)
   } else {
@@ -135,7 +137,7 @@ module.exports = async (
   const receipt = await apmFactory.newAPM(tldHash, labelHash, owner)
 
   log('=========')
-  const apmAddr = receipt.logs.filter(l => l.event == 'DeployAPM')[0].args.apm
+  const apmAddr = receipt.logs.filter((l) => l.event == 'DeployAPM')[0].args.apm
   log('# APM:')
   log('Address:', apmAddr)
   log('Transaction hash:', receipt.tx)

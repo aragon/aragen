@@ -37,7 +37,7 @@ module.exports = async (
   await logDeploy(factory, { verbose })
   const receipt = await factory.newENS(owner)
 
-  const ensAddr = receipt.logs.filter(l => l.event == 'DeployENS')[0].args.ens
+  const ensAddr = receipt.logs.filter((l) => l.event == 'DeployENS')[0].args.ens
   log('====================')
   log('Deployed ENS:', ensAddr)
 

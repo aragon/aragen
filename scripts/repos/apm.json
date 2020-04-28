@@ -1,0 +1,40 @@
+{
+  "registries": {
+    "aragonpm.eth": [
+      "agent",
+      "aragon",
+      "aragon-fundraising",
+      "balance-redirect-presale",
+      "bancor-formula",
+      "bare-kit",
+      "bare-template",
+      "batched-bancor-market-maker",
+      "company-board-template",
+      "company-template",
+      "dandelion-org-template",
+      "dandelion-voting",
+      "delay",
+      "fundraising-multisig-template",
+      "finance",
+      "membership-template.aragonpm.eth",
+      "presale",
+      "redemptions",
+      "reputation-template",
+      "tap",
+      "time-lock",
+      "token-balance-oracle",
+      "token-manager",
+      "token-request",
+      "voting",
+      "vault"
+    ],
+    "open.aragonpm.eth":[
+      "futarchy",
+      "oracle-manager"
+    ],
+    "hatch.aragonpm.eth":[
+      "token-wrapper",
+      "voting-aggregator"
+    ]
+  }
+}
