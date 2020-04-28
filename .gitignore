@@ -1,11 +1,9 @@
 # Dependencies
 node_modules
 
-nohup.out
 package-lock.json
 
 # build
-repos
 build
 flattened_contracts
 

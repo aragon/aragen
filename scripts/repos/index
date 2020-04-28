@@ -1,0 +1,115 @@
+const getAccounts = require('@aragon/os/scripts/helpers/get-accounts')
+const { ethers } = require('ethers')
+const path = require('path')
+const Web3 = require('web3')
+//
+const { getExternalRepoVersion, publishVersion } = require('./apm')
+const { readJson } = require('./utils')
+
+const globalWeb3 = this.web3 // Not injected unless called directly via truffle
+const defaultOwner = process.env.OWNER
+const defaultENSAddress = process.env.ENS
+
+module.exports = async (
+  truffleExecCallback,
+  {
+    web3 = globalWeb3,
+    owner = defaultOwner,
+    ensAddress = defaultENSAddress,
+    networkToFetch = 'homestead',
+    verbose = true,
+  } = {}
+) => {
+  const log = (...args) => {
+    if (verbose) {
+      console.log(...args)
+    }
+  }
+
+  if (!owner) {
+    const accounts = await getAccounts(web3)
+    owner = accounts[0]
+    log(
+      `No OWNER environment variable passed, setting ENS owner to provider's account: ${owner}`
+    )
+  }
+
+  const ethersWeb3Provider = new ethers.providers.Web3Provider(
+    web3.currentProvider,
+    {
+      name: 'rpc',
+      chainId: 8545,
+      ensAddress,
+    }
+  )
+
+  const { registries } = readJson(path.resolve(__dirname, 'apm.json'))
+
+  log('Deploying Repos...')
+  for (let [registry, repos] of Object.entries(registries)) {
+    for (const repo of repos) {
+      const fullName = `${repo}.${registry}`
+
+      const infuraProvider = new ethers.providers.InfuraProvider(networkToFetch)
+      const etherscanProvider = new ethers.providers.EtherscanProvider(
+        networkToFetch
+      )
+
+      // Fetch version from external network
+      const versionData = await getExternalRepoVersion(
+        fullName,
+        '',
+        infuraProvider
+      )
+      const { contractAddress, contentURI } = versionData
+
+      // Fetch the deploy transaction from etherscan
+      const history = await etherscanProvider.getHistory(contractAddress, 0)
+      const deployTx = history[0]
+
+      log('Deploying Repo...')
+      const newDeployTx = await web3.eth.sendTransaction({
+        from: owner,
+        data: deployTx.data,
+      })
+      log('====================')
+
+      const newContractAddress = newDeployTx.contractAddress
+      log(newContractAddress)
+
+      log('Publishing Repo...')
+      const versionInfo = {
+        version: [1, 0, 0],
+        contractAddress: newContractAddress,
+        contentUri: contentURI,
+      }
+
+      const txData = await publishVersion(
+        appName,
+        versionInfo,
+        ethersWeb3Provider,
+        {
+          managerAddress: owner,
+        }
+      )
+
+      const newPublishTx = await web3.eth.sendTransaction({
+        from: owner,
+        to: txData.to,
+        data: apm.encodePublishVersionTxData(txData),
+      })
+      log('====================')
+
+      const newRepoAddress = newPublishTx.contractAddress
+      log(newRepoAddress)
+    }
+  }
+  log('====================')
+
+  if (typeof truffleExecCallback === 'function') {
+    // Called directly via `truffle exec`
+    truffleExecCallback()
+  } else {
+    return {}
+  }
+}
