@@ -1,3 +1,17 @@
+/*
+ * this task is used to create APM (AragonPM Registry DAO) such as
+ * 1hive.aragonpm.eth, open.aragonpm.eth.
+ *
+ * Usage:
+ *    npx hardhat new-apm --name {name} --apm {apmAddress} --factory {apmFactoryAddress} --network {network}
+ * where
+ *    - name is the label name of the APM, i.e. 1hive
+ *    - apmAddress is the APM address
+ *    - apmFacotryAddress is APMRegistryFactory address
+ *
+ * For example, on mumbai:
+ *    npx hardhat new-apm --name 1hive --apm 0x78e08e43244187f2b922241ce7397d8f013a02d6 --factory 0x5e5de5f3dae619b5469b02a3d50ffb7602f6e726 --network mumbai
+ */
 const namehash = require("eth-ens-namehash").hash;
 
 const log = console.log;
