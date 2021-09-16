@@ -50,10 +50,9 @@ module.exports = {
       throwOnTransactionFailures: true,
       throwOnCallFailures: true,
       allowUnlimitedContractSize: true,
-      forking: {
-        url: getNetworkConfig("mumbai").url,
-      },
     },
+    mainnet: getNetworkConfig("mainnet"),
+    rinkeby: getNetworkConfig("rinkeby"),
     mumbai: getNetworkConfig("mumbai"),
     matic: getNetworkConfig("matic"),
   },

@@ -12,3 +12,6 @@ flattened_contracts
 # snapshot
 aragon-ganache
 ipfs-cache
+
+artifacts
+cache
